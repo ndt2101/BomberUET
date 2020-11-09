@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public class test {
+public class test {
+uufhsiudh
 }
