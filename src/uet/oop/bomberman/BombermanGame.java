@@ -2,29 +2,31 @@ package uet.oop.bomberman;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import uet.oop.bomberman.entities.Bomber;
-import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.Grass;
-import uet.oop.bomberman.entities.Wall;
+import uet.oop.bomberman.entities.*;
 import uet.oop.bomberman.graphics.Sprite;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class BombermanGame extends Application {
-    
-    public static final int WIDTH = 20;
-    public static final int HEIGHT = 15;
+
+    public static int WIDTH;
+    public static int HEIGHT ;
     
     private GraphicsContext gc;
     private Canvas canvas;
-    private List<Entity> entities = new ArrayList<>();
-    private List<Entity> stillObjects = new ArrayList<>();
+    protected List<Entity> entities = new ArrayList<>();
+    protected List<Entity> stillObjects = new ArrayList<>();
 
 
     public static void main(String[] args) {
@@ -33,6 +35,11 @@ public class BombermanGame extends Application {
 
     @Override
     public void start(Stage stage) {
+        Map map = new Map();
+        map.insertFromFile();
+        WIDTH = map.colum;
+        HEIGHT = map.row;
+
         // Tao Canvas
         canvas = new Canvas(Sprite.SCALED_SIZE * WIDTH, Sprite.SCALED_SIZE * HEIGHT);
         gc = canvas.getGraphicsContext2D();
@@ -57,10 +64,49 @@ public class BombermanGame extends Application {
         };
         timer.start();
 
-        createMap();
+        map.loadStillObjects(stillObjects);
+        map.loadEntities(entities);
 
-        Entity bomberman = new Bomber(1, 1, Sprite.player_right.getFxImage());
-        entities.add(bomberman);
+        Entity bomberman = entities.get(0);
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                switch (event.getCode()){
+                    case UP:{
+                        bomberman.moveUp();
+                        break;
+                    }
+                    case DOWN:{
+                        bomberman.moveDown();
+                        break;
+                    }
+                    case LEFT:{
+                        bomberman.moveLeft();
+                        break;
+                    }
+                    case RIGHT:{
+                        bomberman.moveRight();
+                        break;
+                    }
+                    case W:{
+                        bomberman.moveUp();
+                        break;
+                    }
+                    case S:{
+                        bomberman.moveDown();
+                        break;
+                    }
+                    case A:{
+                        bomberman.moveLeft();
+                        break;
+                    }
+                    case D:{
+                        bomberman.moveRight();
+                        break;
+                    }
+                }
+            }
+        });
     }
 
     public void createMap() {
