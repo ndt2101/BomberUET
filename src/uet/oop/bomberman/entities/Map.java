@@ -1,5 +1,11 @@
 package uet.oop.bomberman.entities;
 
+import uet.oop.bomberman.entities.airEntities.*;
+import uet.oop.bomberman.entities.enemy.Balloon;
+import uet.oop.bomberman.entities.enemy.Oneal;
+import uet.oop.bomberman.entities.groundEntities.Grass;
+import uet.oop.bomberman.entities.groundEntities.Portal;
+import uet.oop.bomberman.entities.groundEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
@@ -67,11 +73,11 @@ public class Map {
                         break;
                     }
                     case '1':{
-                        object = new Enemy(colIndex, rowIndex, Sprite.balloom_right1.getFxImage());
+                        object = new Balloon(colIndex, rowIndex, Sprite.balloom_right1.getFxImage());
                         break;
                     }
                     case '2':{
-                        object = new Enemy(colIndex, rowIndex, Sprite.oneal_right1.getFxImage());
+                        object = new Oneal(colIndex, rowIndex, Sprite.oneal_right1.getFxImage());
                         break;
                     }
                     case 'b':{
@@ -121,5 +127,70 @@ public class Map {
             }
 
         }
+    }
+
+
+    public int[][] loadMapInt(){
+        int[][] mapInt = new int[row][colum];
+        for(int rowIndex = 0; rowIndex < map.size(); rowIndex++){
+            ArrayList<Character> lineChar = map.get(rowIndex);
+            for(int colIndex = 0; colIndex < lineChar.size(); colIndex++){
+                switch (lineChar.get(colIndex)){
+                    case '#':{
+                        mapInt[rowIndex][colIndex] = -1;
+                        break;
+                    }
+                    case 'x':{
+                        mapInt[rowIndex][colIndex] = 0;
+                        break;
+                    }
+                    case '*':{
+                        mapInt[rowIndex][colIndex] = 1;
+                        break;
+                    }
+                    case '1':{
+                        mapInt[rowIndex][colIndex] = 1;
+                        break;
+                    }
+                    case '2':{
+                        mapInt[rowIndex][colIndex] = 1;
+                        break;
+                    }
+                    case 'b':{
+                        mapInt[rowIndex][colIndex] = 2;
+                        break;
+                    }
+                    case 'f':{
+                        mapInt[rowIndex][colIndex] = 2;
+                        break;
+                    }
+                    case 's':{
+                        mapInt[rowIndex][colIndex] = 2;
+                        break;
+                    }
+                    default:{
+                        mapInt[rowIndex][colIndex] = 0;
+                        break;
+                    }
+                }
+            }
+        }
+        for(int rowIndex = 0; rowIndex < row; rowIndex++){
+            for(int colIndex = 0; colIndex < colum; colIndex++){
+                System.out.print(mapInt[rowIndex][colIndex]);
+            }
+            System.out.println();
+        }
+        return mapInt;
+    }
+
+    public ArrayList<ArrayList<Character>> getMap(){
+        return map;
+    }
+
+    public static void main(String[] args){
+        Map map = new Map();
+        map.insertFromFile();
+        map.loadMapInt();
     }
 }

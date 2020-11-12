@@ -28,16 +28,4 @@ public abstract class Entity {
     }
     public abstract void update();
 
-    public void moveUp(){
-        if(y > 0) y -= Sprite.SCALED_SIZE;
-    }
-    public void moveDown(){
-        y += Sprite.SCALED_SIZE;
-    }
-    public void moveLeft(){
-        if(x > 0) x -= Sprite.SCALED_SIZE;
-    }
-    public void moveRight(){
-        x += Sprite.SCALED_SIZE;
-    }
 }

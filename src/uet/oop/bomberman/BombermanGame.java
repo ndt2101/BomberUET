@@ -10,13 +10,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import uet.oop.bomberman.entities.*;
+import uet.oop.bomberman.entities.airEntities.Bomber;
+import uet.oop.bomberman.entities.bomb.Bomb;
+import uet.oop.bomberman.entities.groundEntities.Grass;
+import uet.oop.bomberman.entities.groundEntities.Wall;
 import uet.oop.bomberman.graphics.Sprite;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class BombermanGame extends Application {
 
@@ -25,13 +27,16 @@ public class BombermanGame extends Application {
     
     private GraphicsContext gc;
     private Canvas canvas;
-    protected List<Entity> entities = new ArrayList<>();
-    protected List<Entity> stillObjects = new ArrayList<>();
+    public static List<Entity> entities = new ArrayList<>();
+    public static List<Entity> stillObjects = new ArrayList<>();
 
+    public static ArrayList<ArrayList<Character>> mapChar;
+    public static int[][] mesh;
 
     public static void main(String[] args) {
         Application.launch(BombermanGame.class);
     }
+
 
     @Override
     public void start(Stage stage) {
@@ -64,10 +69,12 @@ public class BombermanGame extends Application {
         };
         timer.start();
 
+        mapChar = map.getMap();
+        mesh = map.loadMapInt();
         map.loadStillObjects(stillObjects);
         map.loadEntities(entities);
 
-        Entity bomberman = entities.get(0);
+        Bomber bomberman = (Bomber) entities.get(0);
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -102,6 +109,10 @@ public class BombermanGame extends Application {
                     }
                     case D:{
                         bomberman.moveRight();
+                        break;
+                    }
+                    case SPACE:{
+                        bomberman.shoot();
                         break;
                     }
                 }
