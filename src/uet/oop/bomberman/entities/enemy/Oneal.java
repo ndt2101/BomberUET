@@ -1,20 +1,19 @@
 package uet.oop.bomberman.entities.enemy;
 
 import javafx.scene.image.Image;
-import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.BomberManGame;
 import uet.oop.bomberman.entities.AirEntity;
+import uet.oop.bomberman.entities.Map;
 import uet.oop.bomberman.graphics.Sprite;
 
 /**
  * Created by hello on 11/12/2020.
  */
-public class Oneal extends AirEntity {
-    public int[][] mesh;
-    public int SCALE_SIZE = Sprite.SCALED_SIZE;
+public class Oneal extends Enemy {
     public double time = 30;
-    public Oneal(int x, int y, Image image){
-        super(x, y, image);
-        mesh = BombermanGame.mesh;
+    public int HP = 1;
+    public Oneal(int x, int y, String type, Image img) {
+        super(x, y, type, img);
     }
 
     @Override
@@ -30,46 +29,31 @@ public class Oneal extends AirEntity {
 
     @Override
     public void remove() {
-
+        if(HP == 0){
+            Map.mesh[getY()][getX()] = 0;
+            dead = true;
+        }
+        else HP--;
     }
 
     private void randomMove(){
         double rand = Math.random();
         if(rand < 0.25){
             moveUp();
+            img = Sprite.oneal_left2.getFxImage();
         }
         else if(rand < 0.5){
             moveDown();
+            img = Sprite.oneal_right2.getFxImage();
         }
         else if(rand < 0.75){
             moveLeft();
+            img = Sprite.oneal_left1.getFxImage();
         }
         else {
             moveRight();
+            img = Sprite.oneal_right1.getFxImage();
         }
     }
 
-    @Override
-    public void moveUp(){
-        img = Sprite.oneal_right1.getFxImage();
-        if(y > SCALE_SIZE && mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] == 0) y -= SCALE_SIZE;
-    }
-
-    @Override
-    public void moveDown(){
-        img = Sprite.oneal_left1.getFxImage();
-        if(mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] == 0) y += SCALE_SIZE;
-    }
-
-    @Override
-    public void moveLeft(){
-        img = Sprite.oneal_left2.getFxImage();
-        if(x > SCALE_SIZE && mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] == 0) x -= SCALE_SIZE;
-    }
-
-    @Override
-    public void moveRight(){
-        img = Sprite.oneal_right2.getFxImage();
-        if(mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] == 0) x += SCALE_SIZE;
-    }
 }

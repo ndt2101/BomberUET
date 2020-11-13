@@ -1,40 +1,60 @@
 package uet.oop.bomberman.entities.bomb;
 
-import javafx.scene.image.Image;
-import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.BomberManGame;
 import uet.oop.bomberman.entities.AirEntity;
 import uet.oop.bomberman.entities.Entity;
+import javafx.scene.image.Image;
+import uet.oop.bomberman.entities.Map;
+import uet.oop.bomberman.entities.airEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 
-import java.util.Collection;
-
 /**
- * Created by hello on 11/10/2020.
+ * Created by hello on 11/12/2020.
  */
 public class Bomb extends AirEntity {
-    public int timeOut = 120;
-
-    public Bomb(int x, int y, Image image){
-        super(x, y, image);
+    int timeOut = 120;
+    public int flameRange = Bomber.flameRange;
+    Flames flames;
+    public Bomb(int x, int y, String type, Image img) {
+        super(x, y, type, img);
+        Map.mesh[getY()][getX()] = 2;
+        flames = new Flames(getX(), getY(), flameRange);
+        BomberManGame.flames.add(this.flames);
     }
 
-    @Override
-    public void update() {
-        if(timeOut > 0){
-            timeOut--;
-        }
-        else{
+    public void update(){
+        animate();
+
+        if(timeOut == 0){
 
             explode();
+            remove();
         }
+        timeOut--;
+    }
+
+    public void animate(){
+        if(timeOut % 30 == 0){
+            img = Sprite.bomb_1.getFxImage();
+        }
+        else if (timeOut % 30 == 10){
+            img = Sprite.bomb_2.getFxImage();
+        }
+        else if (timeOut % 30 == 20){
+            img = Sprite.bomb.getFxImage();
+        }
+    }
+
+    public void explode(){
+        flames.explode();
     }
 
     @Override
     public void remove() {
-        BombermanGame.entities.remove(0);
+        if(timeOut > 0) explode();
+        Map.mesh[getY()][getX()] = 0;
+        Bomber.bombRange++;
+        dead = true;
     }
 
-    public void explode(){
-        img = Sprite.bomb_exploded.getFxImage();
-    }
 }

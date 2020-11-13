@@ -1,102 +1,67 @@
 package uet.oop.bomberman;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Random;
 
 /**
  * Created by hello on 11/9/2020.
  */
 public class Solution {
+    public static String ch = "   *f2b   f        x  s        f s     1x ";
+    public static String ch2 = "   *fb   f        x  s        f s     x ";
+    public static void randomMap() throws IOException {
+        Random rd = new Random();
+        int row = rd.nextInt(5) + 15;
+        int colum = rd.nextInt(10) + 20;
+        System.out.println(row + " " + colum);
 
-    public void insertFromFile() throws FileNotFoundException {
-        int level;
-        int row;
-        int colum;
-        ArrayList<ArrayList<Character>> map = new ArrayList<>();
+        char[][] map = new char[row][colum];
 
-        File file = new File("res/levels/Level1.txt");
-        Scanner scan = new Scanner(file);
-        level = scan.nextInt();
-        row = scan.nextInt();
-        colum = scan.nextInt();
-
-        scan.nextLine();
-
-        for(int rowIndex = 0; rowIndex < row; rowIndex++){
-            String line = scan.nextLine();
-            ArrayList<Character> lineChar = new ArrayList<>();
-            for(int colIndex = 0; colIndex < colum; colIndex++){
-//                map[rowIndex][colIndex] = line.charAt(colIndex);
-                lineChar.add(line.charAt(colIndex));
-            }
-            map.add(lineChar);
-        }
-
-        for(int rowIndex = 0; rowIndex < row; rowIndex++){
-            ArrayList<Character> lineChar = map.get(rowIndex);
-            for(int colIndex = 0; colIndex < colum; colIndex++){
-                System.out.print(lineChar.get(colIndex));
-            }
-            System.out.println();
-        }
-
-    }
-
-    public void loadMap(ArrayList<ArrayList<Character>> map){
-        for(int rowIndex = 0; rowIndex < map.size(); rowIndex++){
-            ArrayList<Character> lineChar = map.get(rowIndex);
-            for(int colIndex = 0; colIndex < lineChar.size(); colIndex++){
-                switch (lineChar.get(colIndex)){
-                    case '#':{
-                        System.out.print("Wall");
-                        break;
-                    }
-                    case '*':{
-                        System.out.print("Brick");
-                        break;
-                    }
-                    case 'x':{
-                        System.out.print("Portal");
-                        break;
-                    }
-                    case 'p':{
-                        System.out.print("Bomber");
-                        break;
-                    }
-                    case '1':{
-                        System.out.print("Balloon");
-                        break;
-                    }
-                    case '2':{
-                        System.out.print("Oneal");
-                        break;
-                    }
-                    case 'b':{
-                        System.out.print("Bomb Item");
-                        break;
-                    }
-                    case 'f':{
-                        System.out.print("Flame Item");
-                        break;
-                    }
-                    case 's':{
-                        System.out.print("Speed Item");
-                        break;
-                    }
-                    default:{
-                        System.out.print("Grass");
-                        break;
-                    }
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < colum; j++){
+                if(i == 0 || i == row - 1 || j == 0 || j == colum - 1){
+                    map[i][j] = '#';
                 }
+                else if(i % 2 == 0  && j % 2 == 0){
+                    map[i][j] = '#';
+                }
+                else if( i < 6 && j < 6){
+                    int index = rd.nextInt(ch2.length());
+                    map[i][j] = ch2.charAt(index);
+                }
+                else{
+                    int index = rd.nextInt(ch.length());
+                    map[i][j] = ch.charAt(index);
+                }
+
             }
-            System.out.println();
         }
+
+//        for(int i = 0; i < row; i++){
+//            for(int j = 0; j < colum; j++){
+//                System.out.print(map[i][j]);
+//            }
+//            System.out.println();
+//        }
+        map[1][1] = 'p';
+
+        File file = new File("res/levels/Level0.txt");
+        FileWriter  fileWriter = new FileWriter(file);
+        fileWriter.write("1 " + row + " " + colum + "\n");
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < colum; j++){
+                fileWriter.write(map[i][j]);
+            }
+            fileWriter.write("\n");
+        }
+        fileWriter.write("\n");
+        fileWriter.close();
+        return;
     }
 
-    public static void main(String[] strings) throws FileNotFoundException {
-        Solution solution = new Solution();
-        solution.insertFromFile();
+    public static void main(String[] strings) throws IOException {
+        Solution.randomMap();
     }
 }

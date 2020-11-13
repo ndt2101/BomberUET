@@ -3,13 +3,16 @@ package uet.oop.bomberman.entities.airEntities;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.entities.AirEntity;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.Map;
 
 /**
  * Created by hello on 11/10/2020.
  */
 public class SpeedItem extends AirEntity {
-    public SpeedItem(int x, int y, Image img) {
-        super( x, y, img);
+    public SpeedItem(int x, int y, String type, Image img) {
+        super(x, y, type, img);
+        item = true;
+        HP = 1;
     }
 
     @Override
@@ -19,6 +22,10 @@ public class SpeedItem extends AirEntity {
 
     @Override
     public void remove() {
-
+        if(HP == 0){
+            Map.mesh[getY()][getX()] = 0;
+            dead = true;
+        }
+        else HP--;
     }
 }

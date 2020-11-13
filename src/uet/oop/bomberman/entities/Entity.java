@@ -1,13 +1,16 @@
 package uet.oop.bomberman.entities;
 
-import javafx.scene.SnapshotParameters;
+
+import uet.oop.bomberman.graphics.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import uet.oop.bomberman.graphics.Sprite;
 
-public abstract class Entity {
+/**
+ * Created by hello on 11/12/2020.
+ */
+public abstract class Entity{
+    protected boolean dead = false;
+
     //Tọa độ X tính từ góc trái trên trong Canvas
     protected int x;
 
@@ -22,10 +25,17 @@ public abstract class Entity {
         this.y = yUnit * Sprite.SCALED_SIZE;
         this.img = img;
     }
+    public Entity(){
+
+    }
 
     public void render(GraphicsContext gc) {
         gc.drawImage(img, x, y);
     }
     public abstract void update();
 
+    @Override
+    public String toString(){
+        return "(" + x + ", " + y + ")";
+    }
 }

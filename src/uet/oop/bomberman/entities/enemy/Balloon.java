@@ -1,20 +1,19 @@
 package uet.oop.bomberman.entities.enemy;
 
 import javafx.scene.image.Image;
-import uet.oop.bomberman.BombermanGame;
+import uet.oop.bomberman.BomberManGame;
 import uet.oop.bomberman.entities.AirEntity;
+import uet.oop.bomberman.entities.Map;
 import uet.oop.bomberman.graphics.Sprite;
 
 /**
  * Created by hello on 11/12/2020.
  */
-public class Balloon extends AirEntity {
-    public int[][] mesh;
-    public int SCALE_SIZE = Sprite.SCALED_SIZE;
+public class Balloon extends Enemy {
     public double time = 30;
-    public Balloon(int x, int y, Image image){
-        super(x, y, image);
-        mesh = BombermanGame.mesh;
+
+    public Balloon(int x, int y, String type, Image img) {
+        super(x, y, type, img);
     }
 
     @Override
@@ -28,48 +27,25 @@ public class Balloon extends AirEntity {
         }
     }
 
-    @Override
-    public void remove() {
-
-    }
-
     private void randomMove(){
         double rand = Math.random();
         if(rand < 0.25){
             moveUp();
+            img = Sprite.balloom_left2.getFxImage();
         }
         else if(rand < 0.5){
+            img = Sprite.balloom_right2.getFxImage();
             moveDown();
         }
         else if(rand < 0.75){
+            img = Sprite.balloom_left1.getFxImage();
             moveLeft();
         }
         else {
+            img = Sprite.balloom_right1.getFxImage();
             moveRight();
         }
     }
 
-    @Override
-    public void moveUp(){
-        img = Sprite.balloom_right1.getFxImage();
-        if(y > SCALE_SIZE && mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] == 0) y -= SCALE_SIZE;
-    }
 
-    @Override
-    public void moveDown(){
-        img = Sprite.balloom_left1.getFxImage();
-        if(mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] == 0) y += SCALE_SIZE;
-    }
-
-    @Override
-    public void moveLeft(){
-        img = Sprite.balloom_right2.getFxImage();
-        if(x > SCALE_SIZE && mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] == 0) x -= SCALE_SIZE;
-    }
-
-    @Override
-    public void moveRight(){
-        img = Sprite.balloom_left2.getFxImage();
-        if(mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] == 0) x += SCALE_SIZE;
-    }
 }

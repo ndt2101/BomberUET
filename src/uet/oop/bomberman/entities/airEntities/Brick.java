@@ -3,13 +3,14 @@ package uet.oop.bomberman.entities.airEntities;
 import javafx.scene.image.Image;
 import uet.oop.bomberman.entities.AirEntity;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.Map;
 
 /**
  * Created by hello on 11/10/2020.
  */
 public class Brick extends AirEntity {
-    public Brick(int x, int y, Image img) {
-        super( x, y, img);
+    public Brick(int x, int y, String type, Image img) {
+        super(x, y, type, img);
     }
 
     @Override
@@ -19,6 +20,7 @@ public class Brick extends AirEntity {
 
     @Override
     public void remove() {
-
+        Map.mesh[getY()][getX()] -= 2;
+        dead = true;
     }
 }

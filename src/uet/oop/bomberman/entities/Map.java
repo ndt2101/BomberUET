@@ -1,12 +1,12 @@
 package uet.oop.bomberman.entities;
 
+import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.entities.airEntities.*;
 import uet.oop.bomberman.entities.enemy.Balloon;
 import uet.oop.bomberman.entities.enemy.Oneal;
 import uet.oop.bomberman.entities.groundEntities.Grass;
 import uet.oop.bomberman.entities.groundEntities.Portal;
 import uet.oop.bomberman.entities.groundEntities.Wall;
-import uet.oop.bomberman.graphics.Sprite;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,10 +22,17 @@ public class Map {
     public int row;
     public int colum;
     ArrayList<ArrayList<Character>> map = new ArrayList<>();
+    public static List<Entity> portals = new ArrayList<>();
+    public static int[][] mesh = new int[0][0];
+
+    public Map(){
+        insertFromFile();
+        loadMapInt();
+    }
 
     public void insertFromFile(){
 
-        File file = new File("res/levels/Level1.txt");
+        File file = new File("res/levels/Level0.txt");
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -58,38 +65,48 @@ public class Map {
 
     }
 
-    public void loadEntities(List<Entity> entities){
+    public void loadEntities(List<AirEntity> entities){
         for(int rowIndex = 0; rowIndex < map.size(); rowIndex++){
             ArrayList<Character> lineChar = map.get(rowIndex);
             for(int colIndex = 0; colIndex < lineChar.size(); colIndex++){
-                Entity object = null;
+                AirEntity object = null;
                 switch (lineChar.get(colIndex)){
                     case '*':{
-                        object = new Brick(colIndex, rowIndex, Sprite.brick.getFxImage());
+                        object = new Brick(colIndex, rowIndex,"Brick", Sprite.brick.getFxImage());
                         break;
                     }
                     case 'p':{
-                        object = new Bomber(colIndex, rowIndex, Sprite.player_right.getFxImage());
+                        object = new Bomber(colIndex, rowIndex,"Bomber", Sprite.player_right.getFxImage());
                         break;
                     }
                     case '1':{
-                        object = new Balloon(colIndex, rowIndex, Sprite.balloom_right1.getFxImage());
+                        object = new Balloon(colIndex, rowIndex, "Balloon", Sprite.balloom_right1.getFxImage());
                         break;
                     }
                     case '2':{
-                        object = new Oneal(colIndex, rowIndex, Sprite.oneal_right1.getFxImage());
+                        object = new Oneal(colIndex, rowIndex,"Oneal", Sprite.oneal_right1.getFxImage());
                         break;
                     }
                     case 'b':{
-                        object = new BombItem(colIndex, rowIndex, Sprite.powerup_bombs.getFxImage());
+                        object = new BombItem(colIndex, rowIndex,"BombItem", Sprite.powerup_bombs.getFxImage());
+                        entities.add(object);
+                        object = new Brick(colIndex, rowIndex, "Brick", Sprite.brick.getFxImage());
                         break;
                     }
                     case 'f':{
-                        object = new FlameItem(colIndex, rowIndex, Sprite.powerup_flames.getFxImage());
+                        object = new FlameItem(colIndex, rowIndex,"FlameItem", Sprite.powerup_flames.getFxImage());
+                        entities.add(object);
+                        object = new Brick(colIndex, rowIndex, "Brick", Sprite.brick.getFxImage());
                         break;
                     }
                     case 's':{
-                        object = new SpeedItem(colIndex, rowIndex, Sprite.powerup_speed.getFxImage());
+                        object = new SpeedItem(colIndex, rowIndex,"SpeedItem", Sprite.powerup_speed.getFxImage());
+                        entities.add(object);
+                        object = new Brick(colIndex, rowIndex, "Brick", Sprite.brick.getFxImage());
+                        break;
+                    }
+                    case 'x':{
+                        object = new Brick(colIndex, rowIndex, "Brick", Sprite.brick.getFxImage());
                         break;
                     }
                     default:{
@@ -116,6 +133,8 @@ public class Map {
                     }
                     case 'x':{
                         object = new Portal(colIndex, rowIndex, Sprite.portal.getFxImage());
+                        Entity portal = new Portal(colIndex, rowIndex, Sprite.portal.getFxImage());
+                        portals.add(portal);
                         break;
                     }
                     default:{
@@ -131,57 +150,52 @@ public class Map {
 
 
     public int[][] loadMapInt(){
-        int[][] mapInt = new int[row][colum];
+        mesh = new int[row][colum];
+
         for(int rowIndex = 0; rowIndex < map.size(); rowIndex++){
             ArrayList<Character> lineChar = map.get(rowIndex);
             for(int colIndex = 0; colIndex < lineChar.size(); colIndex++){
                 switch (lineChar.get(colIndex)){
                     case '#':{
-                        mapInt[rowIndex][colIndex] = -1;
+                        mesh[rowIndex][colIndex] = -1;
                         break;
                     }
                     case 'x':{
-                        mapInt[rowIndex][colIndex] = 0;
+                        mesh[rowIndex][colIndex] = 2;
                         break;
                     }
                     case '*':{
-                        mapInt[rowIndex][colIndex] = 1;
+                        mesh[rowIndex][colIndex] = 2;
                         break;
                     }
                     case '1':{
-                        mapInt[rowIndex][colIndex] = 1;
+                        mesh[rowIndex][colIndex] = 0;
                         break;
                     }
                     case '2':{
-                        mapInt[rowIndex][colIndex] = 1;
+                        mesh[rowIndex][colIndex] = 0;
                         break;
                     }
                     case 'b':{
-                        mapInt[rowIndex][colIndex] = 2;
+                        mesh[rowIndex][colIndex] = 3;
                         break;
                     }
                     case 'f':{
-                        mapInt[rowIndex][colIndex] = 2;
+                        mesh[rowIndex][colIndex] = 3;
                         break;
                     }
                     case 's':{
-                        mapInt[rowIndex][colIndex] = 2;
+                        mesh[rowIndex][colIndex] = 3;
                         break;
                     }
                     default:{
-                        mapInt[rowIndex][colIndex] = 0;
+                        mesh[rowIndex][colIndex] = 0;
                         break;
                     }
                 }
             }
         }
-        for(int rowIndex = 0; rowIndex < row; rowIndex++){
-            for(int colIndex = 0; colIndex < colum; colIndex++){
-                System.out.print(mapInt[rowIndex][colIndex]);
-            }
-            System.out.println();
-        }
-        return mapInt;
+        return mesh;
     }
 
     public ArrayList<ArrayList<Character>> getMap(){
