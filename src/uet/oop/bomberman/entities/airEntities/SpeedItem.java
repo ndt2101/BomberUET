@@ -21,6 +21,11 @@ public class SpeedItem extends AirEntity {
     }
 
     @Override
+    public void animate() {
+
+    }
+
+    @Override
     public void remove() {
         if(HP == 0){
             Map.mesh[getY()][getX()] = 0;

@@ -77,7 +77,7 @@ public class BomberManGame extends Application{
     public void update(){
         entities.forEach(entity -> {
             entity.update();
-
+            entity.render(gc);
             switch (entity.getType()){
                 case "Balloon":{
                     if(entity.toString().equals(player.toString())){

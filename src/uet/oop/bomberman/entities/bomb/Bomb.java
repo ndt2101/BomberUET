@@ -25,7 +25,7 @@ public class Bomb extends AirEntity {
     public void update(){
         animate();
 
-        if(timeOut == 0){
+        if(timeOut == 60){
 
             explode();
             remove();
@@ -34,13 +34,13 @@ public class Bomb extends AirEntity {
     }
 
     public void animate(){
-        if(timeOut % 30 == 0){
+        if(timeOut % 60 == 0){
             img = Sprite.bomb_1.getFxImage();
         }
-        else if (timeOut % 30 == 10){
+        else if (timeOut % 60 == 40){
             img = Sprite.bomb_2.getFxImage();
         }
-        else if (timeOut % 30 == 20){
+        else if (timeOut % 60 == 20){
             img = Sprite.bomb.getFxImage();
         }
     }

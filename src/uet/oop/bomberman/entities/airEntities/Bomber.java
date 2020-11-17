@@ -15,13 +15,14 @@ public class Bomber extends AirEntity {
     public static int speedRange = 1;
     public static int flameRange = 1;
     public static int bombRange = 1;
+
     public Bomber(int x, int y, String type, Image img) {
         super(x, y, type, img);
     }
 
     @Override
     public void update() {
-
+        super.update();
     }
 
     public void increaseSpeed(){
@@ -70,4 +71,19 @@ public class Bomber extends AirEntity {
     public void remove() {
         dead = true;
     }
+
+    public void animate(){
+        if(timeOut % 30 == 0){
+            img = Sprite.player_dead1.getFxImage();
+        }
+        else if (timeOut % 30 == 10){
+            img = Sprite.player_dead2.getFxImage();
+        }
+        else if (timeOut % 30 == 20){
+            img = Sprite.player_dead3.getFxImage();
+        }
+    }
+//    public void check() {
+//        check = true;
+//    }
 }

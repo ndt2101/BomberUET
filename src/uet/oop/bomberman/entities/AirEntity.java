@@ -17,6 +17,8 @@ public abstract class AirEntity {
     protected int x;
     protected int y;
     protected int SCALE_SIZE = Sprite.SCALED_SIZE;
+    public boolean check;
+    public int timeOut = 60;
 
     public AirEntity(int x, int y, String type, Image img){
         this.x = x * Sprite.SCALED_SIZE;
@@ -26,14 +28,25 @@ public abstract class AirEntity {
         this.img = img;
     }
 
+    public void check() {
+        check = true;
+    }
+
     public AirEntity() {
 
     }
 
 
     public void update() {
-
+        if(check == true) {
+            animate();
+            timeOut--;
+            if(timeOut == 0)
+                remove();
+        }
     }
+
+    public abstract void animate();
 
     public void render(GraphicsContext gc) {
         gc.drawImage(img, x, y);

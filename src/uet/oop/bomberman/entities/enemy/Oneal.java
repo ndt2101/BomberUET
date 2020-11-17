@@ -18,12 +18,30 @@ public class Oneal extends Enemy {
 
     @Override
     public void update() {
+        super.update();
         if(time > 0){
             time--;
         }
         else{
             randomMove();
             time = 30;
+        }
+    }
+
+    @Override
+    public void animate() {
+        if(timeOut % 30 == 0){
+            img = Sprite.oneal_dead.getFxImage();
+        }
+        else if (timeOut % 30 == 10){
+            img = Sprite.mob_dead1.getFxImage();
+        }
+        else if (timeOut % 30 == 20){
+            img = Sprite.mob_dead2.getFxImage();
+        }
+        else if(timeOut == 5) {
+
+            img = Sprite.mob_dead3.getFxImage();
         }
     }
 

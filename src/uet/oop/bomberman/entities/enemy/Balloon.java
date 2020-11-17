@@ -18,6 +18,7 @@ public class Balloon extends Enemy {
 
     @Override
     public void update() {
+        super.update();
         if(time > 0){
             time--;
         }
@@ -25,6 +26,13 @@ public class Balloon extends Enemy {
             randomMove();
             time = 30;
         }
+//        if (check) {
+//            animate();
+//            timeOut--;
+//            if(timeOut == 0) {
+//
+//            }
+//        }
     }
 
     private void randomMove(){
@@ -47,5 +55,24 @@ public class Balloon extends Enemy {
         }
     }
 
+    public void check() {
+        check = true;
+    }
+
+    public void animate(){
+        if(timeOut % 30 == 0){
+            img = Sprite.balloom_dead.getFxImage();
+        }
+        else if (timeOut % 30 == 10){
+            img = Sprite.mob_dead1.getFxImage();
+        }
+        else if (timeOut % 30 == 20){
+            img = Sprite.mob_dead2.getFxImage();
+        }
+        else if(timeOut == 5) {
+
+            img = Sprite.mob_dead3.getFxImage();
+        }
+    }
 
 }

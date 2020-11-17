@@ -9,7 +9,7 @@ import uet.oop.bomberman.graphics.Sprite;
 /**
  * Created by hello on 11/12/2020.
  */
-public class Enemy extends AirEntity {
+public abstract class Enemy extends AirEntity {
     public Enemy(int x, int y, String type, Image img) {
         super(x, y, type, img);
         item = true;
@@ -17,8 +17,11 @@ public class Enemy extends AirEntity {
 
     @Override
     public void update() {
-
+        super.update();
     }
+
+    @Override
+    public abstract void animate();
 
     @Override
     public void remove() {

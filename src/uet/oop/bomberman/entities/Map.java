@@ -25,14 +25,14 @@ public class Map {
     public static List<Entity> portals = new ArrayList<>();
     public static int[][] mesh = new int[0][0];
 
-    public Map(){
+    public Map() {
         insertFromFile();
         loadMapInt();
     }
 
     public void insertFromFile(){
 
-        File file = new File("res/levels/Level0.txt");
+        File file = new File("res/levels/Level1.txt");
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -156,35 +156,35 @@ public class Map {
             ArrayList<Character> lineChar = map.get(rowIndex);
             for(int colIndex = 0; colIndex < lineChar.size(); colIndex++){
                 switch (lineChar.get(colIndex)){
-                    case '#':{
+                    case '#':{    //tuong
                         mesh[rowIndex][colIndex] = -1;
                         break;
                     }
-                    case 'x':{
+                    case 'x':{   //potal
                         mesh[rowIndex][colIndex] = 2;
                         break;
                     }
-                    case '*':{
+                    case '*':{   //gach
                         mesh[rowIndex][colIndex] = 2;
                         break;
                     }
-                    case '1':{
+                    case '1':{   //balloon
                         mesh[rowIndex][colIndex] = 0;
                         break;
                     }
-                    case '2':{
+                    case '2':{   //oneal
                         mesh[rowIndex][colIndex] = 0;
                         break;
                     }
-                    case 'b':{
+                    case 'b':{   // boomitem
                         mesh[rowIndex][colIndex] = 3;
                         break;
                     }
-                    case 'f':{
+                    case 'f':{   //flame
                         mesh[rowIndex][colIndex] = 3;
                         break;
                     }
-                    case 's':{
+                    case 's':{   //spead
                         mesh[rowIndex][colIndex] = 3;
                         break;
                     }

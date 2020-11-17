@@ -19,6 +19,11 @@ public class Flame extends AirEntity {
 
     @Override
     public void update() {
+        super.update();
+    }
+
+    @Override
+    public void animate() {
 
     }
 
