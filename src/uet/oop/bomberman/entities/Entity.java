@@ -9,8 +9,6 @@ import javafx.scene.image.Image;
  * Created by hello on 11/12/2020.
  */
 public abstract class Entity{
-    protected boolean dead = false;
-
     //Tọa độ X tính từ góc trái trên trong Canvas
     protected int x;
 
@@ -34,8 +32,16 @@ public abstract class Entity{
     }
     public abstract void update();
 
+    public int getX() {
+        return x / Sprite.SCALED_SIZE;
+    }
+
+    public int getY() {
+        return y / Sprite.SCALED_SIZE;
+    }
+
     @Override
     public String toString(){
-        return "(" + x + ", " + y + ")";
+        return "(" + getX() + ", " + getY() + ")";
     }
 }

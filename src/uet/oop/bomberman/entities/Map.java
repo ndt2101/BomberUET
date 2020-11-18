@@ -195,6 +195,18 @@ public class Map {
                 }
             }
         }
+
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < colum; j++){
+                if(mesh[i][j] < 0){
+                    System.out.print(mesh[i][j]);
+                }
+                else {
+                    System.out.print(mesh[i][j] + " ");
+                }
+            }
+            System.out.println();
+        }
         return mesh;
     }
 

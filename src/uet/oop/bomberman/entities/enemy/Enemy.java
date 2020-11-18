@@ -12,7 +12,6 @@ import uet.oop.bomberman.graphics.Sprite;
 public abstract class Enemy extends AirEntity {
     public Enemy(int x, int y, String type, Image img) {
         super(x, y, type, img);
-        item = true;
     }
 
     @Override
@@ -32,8 +31,6 @@ public abstract class Enemy extends AirEntity {
     @Override
     public void moveUp(){
         if(y > SCALE_SIZE && Map.mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] == 0){
-//            Map.mesh[getY()][getX()] = 0;
-//            Map.mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] = 1;
             y -= SCALE_SIZE;
         }
     }
@@ -41,8 +38,6 @@ public abstract class Enemy extends AirEntity {
     @Override
     public void moveDown(){
         if(Map.mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] == 0 ){
-//            Map.mesh[getY()][getX()] = 0;
-//            Map.mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] = 1;
             y += SCALE_SIZE;
         }
     }
@@ -50,8 +45,6 @@ public abstract class Enemy extends AirEntity {
     @Override
     public void moveLeft(){
         if(x > SCALE_SIZE && Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] == 0 ) {
-//            Map.mesh[getY()][getX()] = 0;
-//            Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] = 1;
             x -= SCALE_SIZE;
         }
     }
@@ -59,8 +52,6 @@ public abstract class Enemy extends AirEntity {
     @Override
     public void moveRight(){
         if(Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] == 0 ) {
-//            Map.mesh[getY()][getX()] = 0;
-//            Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] = 1;
             x += SCALE_SIZE;
         }
     }

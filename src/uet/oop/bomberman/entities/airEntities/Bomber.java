@@ -15,7 +15,10 @@ public class Bomber extends AirEntity {
     public static int speedRange = 1;
     public static int flameRange = 1;
     public static int bombRange = 1;
-    public int moveSize = SCALE_SIZE / 3;
+    public int moveSize = SCALE_SIZE / 2;
+
+    public static int X;
+    public static int Y;
 
     public Bomber(int x, int y, String type, Image img) {
         super(x, y, type, img);
@@ -23,13 +26,20 @@ public class Bomber extends AirEntity {
 
     @Override
     public void update() {
+        X = getX();
+        Y = getY();
         stateClock++;
         super.update();
     }
 
     public void increaseSpeed(){
         speedRange++;
-        moveSize += SCALE_SIZE/5;
+        if(moveSize < SCALE_SIZE){
+           moveSize += SCALE_SIZE/5;
+        }
+        else{
+            moveSize = SCALE_SIZE;
+        }
     }
     public void increaseFlams(){
         flameRange++;
@@ -44,8 +54,9 @@ public class Bomber extends AirEntity {
             x = getX() * SCALE_SIZE;
             y -= moveSize;
         }
-        else if(y % SCALE_SIZE != 0);
-        System.out.println(getX() + " " + getY());
+        else if(y % SCALE_SIZE != 0){
+            y = getY() * SCALE_SIZE;
+        }
     }
 
     public void moveDown(){
@@ -54,8 +65,9 @@ public class Bomber extends AirEntity {
             x = getX() * SCALE_SIZE;
             y += moveSize;
         }
-        else if(y % SCALE_SIZE != 0);
-        System.out.println(getX() + " " + getY());
+        else if(y % SCALE_SIZE != 0){
+            y = getY() * SCALE_SIZE;
+        }
     }
 
     public void moveLeft(){
@@ -65,8 +77,9 @@ public class Bomber extends AirEntity {
             y = getY() * SCALE_SIZE;
             x -= moveSize;
         }
-        else if(x % SCALE_SIZE != 0);
-        System.out.println(getX() + " " + getY());
+        else if(x % SCALE_SIZE != 0){
+            x = getX() * SCALE_SIZE;
+        }
     }
 
     public void moveRight(){
@@ -75,8 +88,9 @@ public class Bomber extends AirEntity {
             y = getY() * SCALE_SIZE;
             x += moveSize;
         }
-        else if(x % SCALE_SIZE != 0);
-        System.out.println(getX() + " " + getY());
+        else if(x % SCALE_SIZE != 0){
+            x = getX() * SCALE_SIZE;
+        }
     }
 
     public void shoot(){
@@ -113,5 +127,12 @@ public class Bomber extends AirEntity {
 
     public void animate(){
         img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, timeOut, 60).getFxImage();
+    }
+
+    public static int GETX(){
+        return X;
+    }
+    public static int GETY(){
+        return Y;
     }
 }

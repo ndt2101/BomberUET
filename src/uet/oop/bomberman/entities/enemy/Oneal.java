@@ -11,7 +11,6 @@ import uet.oop.bomberman.graphics.Sprite;
  */
 public class Oneal extends Enemy {
     public double time = 30;
-    public int HP = 1;
     public Oneal(int x, int y, String type, Image img) {
         super(x, y, type, img);
     }

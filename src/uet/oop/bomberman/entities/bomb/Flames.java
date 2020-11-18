@@ -164,10 +164,11 @@ public class Flames extends Flame {
     public void kill(){
         BomberManGame.entities.forEach(entity -> {
             if(inRange(entity.getX(), entity.getY())){
-//                entity.remove();
-                  entity.check();
-                if(!entity.isItem()){
-
+                if(entity.isItem()){
+                    entity.remove();
+                }
+                else{
+                    entity.check();
                 }
 
             }
