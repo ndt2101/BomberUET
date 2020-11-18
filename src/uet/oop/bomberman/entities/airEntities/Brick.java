@@ -37,14 +37,6 @@ public class Brick extends AirEntity {
 //    }
 
     public void animate(){
-        if(timeOut % 30 == 0){
-            img = Sprite.brick_exploded2.getFxImage();
-        }
-        else if (timeOut % 30 == 10){
-            img = Sprite.brick_exploded1.getFxImage();
-        }
-        else if (timeOut % 30 == 20){
-            img = Sprite.brick_exploded.getFxImage();
-        }
+        img = Sprite.movingSprite(Sprite.brick_exploded, Sprite.brick_exploded1, Sprite.brick_exploded2, timeOut, 60).getFxImage();
     }
 }

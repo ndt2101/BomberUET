@@ -19,7 +19,7 @@ public abstract class AirEntity {
     protected int SCALE_SIZE = Sprite.SCALED_SIZE;
     public boolean check;
     public int timeOut = 60;
-
+    public int stateClock = 0;
     public AirEntity(int x, int y, String type, Image img){
         this.x = x * Sprite.SCALED_SIZE;
         this.y = y * Sprite.SCALED_SIZE;
@@ -85,7 +85,7 @@ public abstract class AirEntity {
 
     @Override
     public String toString(){
-        return "(" + x + ", " + y + ")";
+        return "(" + getX() + ", " + getY() + ")";
     }
 
 }

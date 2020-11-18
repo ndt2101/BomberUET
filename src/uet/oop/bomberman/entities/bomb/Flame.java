@@ -27,6 +27,10 @@ public class Flame extends AirEntity {
 
     }
 
+    public void setImg(Image img){
+        this.img = img;
+    }
+
     @Override
     public void remove() {
         dead = true;

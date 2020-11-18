@@ -33,7 +33,7 @@ public class Flames extends Flame {
     }
 
     public void createFlames(){
-        Flame center = new Flame(getX(), getY(), "Flame", Sprite.bomb_exploded.getFxImage());
+        Flame center = new Flame(getX(), getY(), "center", Sprite.bomb_exploded.getFxImage());
         flames.add(center);
         Flame center1 = new Flame(getX(), getY(), "Flame", Sprite.bomb_exploded1.getFxImage());
         flames1.add(center1);
@@ -42,7 +42,7 @@ public class Flames extends Flame {
 
         for(int i = 1; i <= r; i++){
             if(Map.mesh[getY() - i][getX()] != 0 || i == r){
-                Flame top = new Flame(getX(), getY() - i, "Flame", Sprite.explosion_vertical_top_last.getFxImage());
+                Flame top = new Flame(getX(), getY() - i, "top", Sprite.explosion_vertical_top_last.getFxImage());
                 flames.add(top);
                 Flame top1 = new Flame(getX(), getY() - i, "Flame", Sprite.explosion_vertical_top_last1.getFxImage());
                 flames1.add(top1);
@@ -51,7 +51,7 @@ public class Flames extends Flame {
                 break;
             }
             else{
-                Flame top = new Flame(getX(), getY() - i, "Flame", Sprite.explosion_vertical.getFxImage());
+                Flame top = new Flame(getX(), getY() - i, "top", Sprite.explosion_vertical.getFxImage());
                 flames.add(top);
                 Flame top1 = new Flame(getX(), getY() - i, "Flame", Sprite.explosion_vertical1.getFxImage());
                 flames1.add(top1);
@@ -61,7 +61,7 @@ public class Flames extends Flame {
         }
         for(int i = 1; i <= r; i++){
             if(Map.mesh[getY() + i][getX()] != 0 || i == r){
-                Flame down = new Flame(getX(), getY() + i, "Flame", Sprite.explosion_vertical_down_last.getFxImage());
+                Flame down = new Flame(getX(), getY() + i, "down", Sprite.explosion_vertical_down_last.getFxImage());
                 flames.add(down);
                 Flame down1 = new Flame(getX(), getY() + i, "Flame", Sprite.explosion_vertical_down_last1.getFxImage());
                 flames1.add(down1);
@@ -70,7 +70,7 @@ public class Flames extends Flame {
                 break;
             }
             else{
-                Flame down = new Flame(getX(), getY() + i, "Flame", Sprite.explosion_vertical.getFxImage());
+                Flame down = new Flame(getX(), getY() + i, "down", Sprite.explosion_vertical.getFxImage());
                 flames.add(down);
                 Flame down1 = new Flame(getX(), getY() + i, "Flame", Sprite.explosion_vertical1.getFxImage());
                 flames1.add(down1);
@@ -80,7 +80,7 @@ public class Flames extends Flame {
         }
         for(int i = 1; i <= r; i++){
             if(Map.mesh[getY()][getX() - i] != 0 || i == r){
-                Flame left = new Flame(getX() - i, getY(), "Flame", Sprite.explosion_horizontal_left_last.getFxImage());
+                Flame left = new Flame(getX() - i, getY(), "left", Sprite.explosion_horizontal_left_last.getFxImage());
                 flames.add(left);
                 Flame left1 = new Flame(getX() - i, getY(), "Flame", Sprite.explosion_horizontal_left_last1.getFxImage());
                 flames1.add(left1);
@@ -89,7 +89,7 @@ public class Flames extends Flame {
                 break;
             }
             else{
-                Flame left = new Flame(getX() - i, getY(), "Flame", Sprite.explosion_horizontal.getFxImage());
+                Flame left = new Flame(getX() - i, getY(), "left", Sprite.explosion_horizontal.getFxImage());
                 flames.add(left);
                 Flame left1 = new Flame(getX() - i, getY(), "Flame", Sprite.explosion_horizontal1.getFxImage());
                 flames1.add(left1);
@@ -99,7 +99,7 @@ public class Flames extends Flame {
         }
         for(int i = 1; i <= r; i++){
             if(Map.mesh[getY()][getX() + i] != 0 || i == r){
-                Flame right = new Flame(getX() + i, getY(), "Flame", Sprite.explosion_horizontal_right_last.getFxImage());
+                Flame right = new Flame(getX() + i, getY(), "right", Sprite.explosion_horizontal_right_last.getFxImage());
                 flames.add(right);
                 Flame right1 = new Flame(getX() + i, getY(), "Flame", Sprite.explosion_horizontal_right_last1.getFxImage());
                 flames1.add(right1);
@@ -108,7 +108,7 @@ public class Flames extends Flame {
                 break;
             }
             else{
-                Flame right = new Flame(getX() + i, getY(), "Flame", Sprite.explosion_horizontal.getFxImage());
+                Flame right = new Flame(getX() + i, getY(), "right", Sprite.explosion_horizontal.getFxImage());
                 flames.add(right);
                 Flame right1 = new Flame(getX() + i, getY(), "Flame", Sprite.explosion_horizontal1.getFxImage());
                 flames1.add(right1);
@@ -120,6 +120,38 @@ public class Flames extends Flame {
 
     @Override
     public void update() {
+        stateClock++;
+//        flames.forEach(flame -> {
+//            switch (flame.getType()){
+//                case "center":{
+//                    Image image = Sprite.movingSprite(Sprite.bomb_exploded, Sprite.bomb_exploded1, Sprite.bomb_exploded2, stateClock , 20).getFxImage();
+//                    flame.setImg(image);
+//                    break;
+//                }
+//                case "top":{
+//                    Image image = Sprite.movingSprite(Sprite.explosion_vertical_top_last, Sprite.explosion_vertical_top_last1, Sprite.explosion_vertical_top_last2, stateClock , 20).getFxImage();
+//                    flame.setImg(image);
+//                    break;
+//                }
+//                case "down":{
+//                    Image image = Sprite.movingSprite(Sprite.explosion_vertical_down_last, Sprite.explosion_vertical_down_last1, Sprite.explosion_vertical_down_last2, stateClock , 20).getFxImage();
+//                    flame.setImg(image);
+//                    break;
+//                }
+//                case "left":{
+//                    Image image = Sprite.movingSprite(Sprite.explosion_horizontal_left_last, Sprite.explosion_horizontal_left_last1, Sprite.explosion_horizontal_left_last2, stateClock , 20).getFxImage();
+//                    flame.setImg(image);
+//                    break;
+//                }
+//                case "right":{
+//                    Image image = Sprite.movingSprite(Sprite.explosion_horizontal_right_last, Sprite.explosion_horizontal_right_last1, Sprite.explosion_horizontal_right_last2, stateClock , 20).getFxImage();
+//                    flame.setImg(image);
+//                    break;
+//                }
+//
+//            }
+//        });
+
         if(timeOut == 30){
             kill();
         }
@@ -162,6 +194,12 @@ public class Flames extends Flame {
 
 
     public void render(GraphicsContext gc){
+//       if(timeOut < 30){
+//           flames.forEach(flame -> {
+//               flame.render(gc);
+//           });
+//       }
+
         if(timeOut <=60 && timeOut >= 40){
             flames.forEach(flame -> {
                 flame.render(gc);

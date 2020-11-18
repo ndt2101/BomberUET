@@ -37,6 +37,8 @@ public class BomberManGame extends Application{
     public Canvas canvas;
     public Group root;
 
+    public static Map map = new Map();
+
     Bomber player = null;
 
     public static List<AirEntity> entities = new ArrayList<>();
@@ -69,7 +71,6 @@ public class BomberManGame extends Application{
     };
 
     public void createContent(){
-
 
         timer.start();
     }
@@ -172,7 +173,6 @@ public class BomberManGame extends Application{
 
     @Override
     public void start(Stage primaryStage) {
-        Map map = new Map();
 
         WIDTH = map.colum;
         HEIGHT = map.row;
@@ -196,6 +196,7 @@ public class BomberManGame extends Application{
         map.loadEntities(entities);
 
         player =(Bomber) entities.get(0);
+
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {

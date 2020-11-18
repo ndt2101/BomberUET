@@ -15,6 +15,7 @@ public class Bomber extends AirEntity {
     public static int speedRange = 1;
     public static int flameRange = 1;
     public static int bombRange = 1;
+    public int moveSize = SCALE_SIZE / 3;
 
     public Bomber(int x, int y, String type, Image img) {
         super(x, y, type, img);
@@ -22,11 +23,13 @@ public class Bomber extends AirEntity {
 
     @Override
     public void update() {
+        stateClock++;
         super.update();
     }
 
     public void increaseSpeed(){
         speedRange++;
+        moveSize += SCALE_SIZE/5;
     }
     public void increaseFlams(){
         flameRange++;
@@ -35,28 +38,45 @@ public class Bomber extends AirEntity {
         bombRange++;
     }
 
-    @Override
     public void moveUp(){
-        img = Sprite.player_up.getFxImage();
-        if(y > SCALE_SIZE && Map.mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] == 0 || Map.mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] == 1) y -= SCALE_SIZE;
+        img = Sprite.movingSprite(Sprite.player_up, Sprite.player_up_1, Sprite.player_up_2, stateClock, 20).getFxImage();
+        if(BomberManGame.map.mesh[getY() - 1][getX()] == 0 || BomberManGame.map.mesh[getY() - 1][getX()] == 1) {
+            x = getX() * SCALE_SIZE;
+            y -= moveSize;
+        }
+        else if(y % SCALE_SIZE != 0);
+        System.out.println(getX() + " " + getY());
     }
 
-    @Override
     public void moveDown(){
-        img = Sprite.player_down.getFxImage();
-        if(Map.mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] == 0 || Map.mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] == 1) y += SCALE_SIZE;
+        img = Sprite.movingSprite(Sprite.player_down, Sprite.player_down_1, Sprite.player_down_2, stateClock, 20).getFxImage();
+        if(BomberManGame.map.mesh[getY() + 1][getX()] == 0 || BomberManGame.map.mesh[getY() + 1][getX()] == 1) {
+            x = getX() * SCALE_SIZE;
+            y += moveSize;
+        }
+        else if(y % SCALE_SIZE != 0);
+        System.out.println(getX() + " " + getY());
     }
 
-    @Override
     public void moveLeft(){
-        img = Sprite.player_left.getFxImage();
-        if(x > SCALE_SIZE && Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] == 0 || Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] == 1) x -= SCALE_SIZE;
+        img = Sprite.movingSprite(Sprite.player_left, Sprite.player_left_1, Sprite.player_left_2, stateClock, 20).getFxImage();
+
+        if(BomberManGame.map.mesh[getY()][getX() - 1] == 0 || BomberManGame.map.mesh[getY()][getX() - 1] == 1) {
+            y = getY() * SCALE_SIZE;
+            x -= moveSize;
+        }
+        else if(x % SCALE_SIZE != 0);
+        System.out.println(getX() + " " + getY());
     }
 
-    @Override
     public void moveRight(){
-        img = Sprite.player_right.getFxImage();
-        if(Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] == 0 || Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] == 1) x += SCALE_SIZE;
+        img = Sprite.movingSprite(Sprite.player_right, Sprite.player_right_1, Sprite.player_right_2, stateClock, 20).getFxImage();
+        if(BomberManGame.map.mesh[getY()][getX() + 1] == 0 || BomberManGame.map.mesh[getY()][getX() + 1] == 1){
+            y = getY() * SCALE_SIZE;
+            x += moveSize;
+        }
+        else if(x % SCALE_SIZE != 0);
+        System.out.println(getX() + " " + getY());
     }
 
     public void shoot(){
@@ -66,6 +86,25 @@ public class Bomber extends AirEntity {
             bombRange--;
         }
     }
+    @Override
+    public int getX(){
+        if(x % SCALE_SIZE < 16){
+            return(int) Math.floor(x / SCALE_SIZE);
+        }
+        else{
+            return (int) Math.floor(x / SCALE_SIZE) + 1;
+        }
+    }
+
+    @Override
+    public int getY(){
+        if(y % SCALE_SIZE < 16){
+            return(int) Math.floor(y / SCALE_SIZE);
+        }
+        else{
+            return (int) Math.floor(y / SCALE_SIZE) + 1;
+        }
+    }
 
     @Override
     public void remove() {
@@ -73,17 +112,6 @@ public class Bomber extends AirEntity {
     }
 
     public void animate(){
-        if(timeOut % 30 == 0){
-            img = Sprite.player_dead1.getFxImage();
-        }
-        else if (timeOut % 30 == 10){
-            img = Sprite.player_dead2.getFxImage();
-        }
-        else if (timeOut % 30 == 20){
-            img = Sprite.player_dead3.getFxImage();
-        }
+        img = Sprite.movingSprite(Sprite.player_dead1, Sprite.player_dead2, Sprite.player_dead3, timeOut, 60).getFxImage();
     }
-//    public void check() {
-//        check = true;
-//    }
 }
