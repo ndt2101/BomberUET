@@ -50,7 +50,7 @@ public class Map {
 
     public void insertFromFile(){
 
-        File file = new File("res/levels/Level0.txt");
+        File file = new File("res/levels/Level1.txt");
         Scanner scan = null;
         try {
             scan = new Scanner(file);

@@ -1,7 +1,7 @@
 package uet.oop.bomberman.entities;
 
 import edu.princeton.cs.algs4.UF;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
+//import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 import java.nio.file.DirectoryNotEmptyException;
 import java.util.ArrayList;
