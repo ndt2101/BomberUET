@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities;
 
+import edu.princeton.cs.algs4.UF;
 import uet.oop.bomberman.Solution;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.entities.airEntities.*;
@@ -11,9 +12,11 @@ import uet.oop.bomberman.entities.groundEntities.Wall;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -23,18 +26,26 @@ public class Map {
     public int level;
     public int row;
     public int colum;
-    ArrayList<ArrayList<Character>> map = new ArrayList<>();
-    public static List<Entity> portals = new ArrayList<>();
-    public static int[][] mesh = new int[0][0];
+
+    public ArrayList<ArrayList<Character>> map = new ArrayList<>();
+    public List<Entity> portals = new ArrayList<>();
+    public int[][] mesh = new int[0][0];
+
+    public UF uf ;
 
     public Map() {
+
         try {
-            Solution.randomMap();
+            randomMap();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         insertFromFile();
-        loadMapInt();
+        loadMesh();
+
+        uf = new UF((row - 2) * (colum - 2));
+        loadUF();
     }
 
     public void insertFromFile(){
@@ -72,6 +83,10 @@ public class Map {
 
     }
 
+    /**
+     * add airEntity to entities list
+     * @param entities
+     */
     public void loadEntities(List<AirEntity> entities){
         for(int rowIndex = 0; rowIndex < map.size(); rowIndex++){
             ArrayList<Character> lineChar = map.get(rowIndex);
@@ -92,6 +107,10 @@ public class Map {
                     }
                     case '2':{
                         object = new Oneal(colIndex, rowIndex,"Oneal", Sprite.oneal_right1.getFxImage());
+                        break;
+                    }
+                    case '3':{
+                        object = new Oneal(colIndex, rowIndex,"Doll", Sprite.doll_right1.getFxImage());
                         break;
                     }
                     case 'b':{
@@ -128,6 +147,11 @@ public class Map {
 
         }
     }
+
+    /**
+     * add groundEntity to stillObject list
+     * @param stillObjects
+     */
     public void loadStillObjects(List<Entity> stillObjects ){
         for(int rowIndex = 0; rowIndex < map.size(); rowIndex++){
             ArrayList<Character> lineChar = map.get(rowIndex);
@@ -155,8 +179,11 @@ public class Map {
         }
     }
 
-
-    public int[][] loadMapInt(){
+    /**
+     * load map dung de move
+     * @return
+     */
+    public int[][] loadMesh(){
         mesh = new int[row][colum];
 
         for(int rowIndex = 0; rowIndex < map.size(); rowIndex++){
@@ -183,6 +210,10 @@ public class Map {
                         mesh[rowIndex][colIndex] = 0;
                         break;
                     }
+                    case '3':{   //doll
+                        mesh[rowIndex][colIndex] = 0;
+                        break;
+                    }
                     case 'b':{   // boomitem
                         mesh[rowIndex][colIndex] = 3;
                         break;
@@ -191,7 +222,7 @@ public class Map {
                         mesh[rowIndex][colIndex] = 3;
                         break;
                     }
-                    case 's':{   //spead
+                    case 's':{   //speed
                         mesh[rowIndex][colIndex] = 3;
                         break;
                     }
@@ -217,13 +248,75 @@ public class Map {
         return mesh;
     }
 
-    public ArrayList<ArrayList<Character>> getMap(){
-        return map;
+    public void loadUF(){
+
+        for(int i = 1; i < row - 1; i++){
+            for(int j = 1; j < colum - 1; j++){
+                if(mesh[i][j] == 0){
+                    if(mesh[i][j+1] == 0){
+                        uf.union(getUFId(i,j), getUFId(i, j+1));
+                    }
+                    if(mesh[i+1][j] == 0){
+                        uf.union(getUFId(i,j), getUFId(i+1, j));
+                    }
+                }
+            }
+        }
+
+    }
+
+    public int getUFId(int x, int y){
+        return (x - 1) * (colum - 2) + y - 1;
+    }
+
+    public String ch = "   *f2b   f        x  s        f s     1x ";
+    public String ch2 = "   *fb   f        x  s        f s     x ";
+    public void randomMap() throws IOException {
+        Random rd = new Random();
+        int row = rd.nextInt(5) + 15;
+        int colum = rd.nextInt(10) + 20;
+
+        char[][] map = new char[row][colum];
+
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < colum; j++){
+                if(i == 0 || i == row - 1 || j == 0 || j == colum - 1){
+                    map[i][j] = '#';
+                }
+                else if(i % 2 == 0  && j % 2 == 0){
+                    map[i][j] = '#';
+                }
+                else if( i < 6 && j < 6){
+                    int index = rd.nextInt(ch2.length());
+                    map[i][j] = ch2.charAt(index);
+                }
+                else{
+                    int index = rd.nextInt(ch.length());
+                    map[i][j] = ch.charAt(index);
+                }
+
+            }
+        }
+
+        map[1][1] = 'p';
+
+        File file = new File("res/levels/Level0.txt");
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write("1 " + row + " " + colum + "\n");
+        for(int i = 0; i < row; i++){
+            for(int j = 0; j < colum; j++){
+                fileWriter.write(map[i][j]);
+            }
+            fileWriter.write("\n");
+        }
+        fileWriter.write("\n");
+        fileWriter.close();
+        return;
     }
 
     public static void main(String[] args){
         Map map = new Map();
         map.insertFromFile();
-        map.loadMapInt();
+        map.loadMesh();
     }
 }

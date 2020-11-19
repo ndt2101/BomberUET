@@ -1,11 +1,13 @@
 package uet.oop.bomberman.entities;
 
+import edu.princeton.cs.algs4.UF;
 import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
 import java.nio.file.DirectoryNotEmptyException;
 import java.util.ArrayList;
 import java.util.Set;
 
+import uet.oop.bomberman.BomberManGame;
 import uet.oop.bomberman.entities.Map.*;
 
 /**
@@ -100,7 +102,7 @@ public class FindWay {
             next = distances.get(i).getNext();
             switch (next){
                 case "up": {
-                    if(Map.mesh[enemyY - 1][enemyX] != 0){
+                    if(BomberManGame.map.mesh[enemyY - 1][enemyX] != 0){
                         i++;
                     }
                     else{
@@ -109,7 +111,7 @@ public class FindWay {
                     break;
                 }
                 case "down": {
-                    if(Map.mesh[enemyY + 1][enemyX] != 0){
+                    if(BomberManGame.map.mesh[enemyY + 1][enemyX] != 0){
                         i++;
                     }
                     else{
@@ -118,7 +120,7 @@ public class FindWay {
                     break;
                 }
                 case "left": {
-                    if(Map.mesh[enemyY ][enemyX - 1] != 0){
+                    if(BomberManGame.map.mesh[enemyY ][enemyX - 1] != 0){
                         i++;
                     }
                     else{
@@ -127,7 +129,7 @@ public class FindWay {
                     break;
                 }
                 case "right": {
-                    if(Map.mesh[enemyY ][enemyX + 1] != 0){
+                    if(BomberManGame.map.mesh[enemyY ][enemyX + 1] != 0){
                         i++;
                     }
                     else{
@@ -137,7 +139,7 @@ public class FindWay {
                 }
             }
         }
-        while (!canMove || i >= 4);
+        while (!canMove && i < 4);
 
         return next;
     }
@@ -146,7 +148,11 @@ public class FindWay {
     public static void main(String[] strings){
         FindWay findWay = new FindWay();
 //        System.out.println(findWay.distance(0, 0, 1, 1));
-        findWay.calculateWay(1, 1, 2, 1);
+//        findWay.calculateWay(1, 1, 2, 1);
+
+        UF uf = new UF(20 * 5);
+
+        System.out.println(uf.count());
     }
 
 }

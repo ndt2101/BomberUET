@@ -1,5 +1,6 @@
 package uet.oop.bomberman;
 
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -28,6 +29,7 @@ import java.util.List;
 /**
  * Created by hello on 11/12/2020.
  */
+
 public class BomberManGame extends Application{
     public int SCALE_SIZE = Sprite.SCALED_SIZE;
     public static int WIDTH;
@@ -39,7 +41,7 @@ public class BomberManGame extends Application{
 
     public static Map map = new Map();
 
-    Bomber player = null;
+    private Bomber player = null;
 
     public static List<AirEntity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
@@ -47,7 +49,7 @@ public class BomberManGame extends Application{
 
     private int timeOut = 60;
 
-    AnimationTimer timer = new AnimationTimer() {
+    private AnimationTimer timer = new AnimationTimer() {
         @Override
         public void handle(long now) {
             if(player.isDead()) {
@@ -78,7 +80,6 @@ public class BomberManGame extends Application{
     public void update(){
         entities.forEach(entity -> {
             entity.update();
-            entity.render(gc);
             switch (entity.getType()){
                 case "Balloon":{
                     if(entity.toString().equals(player.toString())){
@@ -116,6 +117,7 @@ public class BomberManGame extends Application{
             }
 
         });
+
         entities.removeIf(entity -> {
             return entity.isDead();
         });
@@ -128,7 +130,7 @@ public class BomberManGame extends Application{
             return flame.isDead();
         });
 
-        Map.portals.forEach(portal -> {
+        map.portals.forEach(portal -> {
             if(portal.toString().equals(player.toString())){
                 boolean emptyEnemy = true;
                 for(int i = 0; i < entities.size(); i++){
@@ -186,7 +188,6 @@ public class BomberManGame extends Application{
         Scene scene = new Scene(root);
 
         primaryStage.setTitle("B O O M");
-
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -264,6 +265,7 @@ public class BomberManGame extends Application{
                 }
             }
         });
+
     }
 
     public static void main(String[] args){
@@ -272,7 +274,6 @@ public class BomberManGame extends Application{
 
     @Override
     public void init() throws IOException {
-        Solution.randomMap();
     }
 
     @Override

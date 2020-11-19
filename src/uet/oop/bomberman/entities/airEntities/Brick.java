@@ -1,6 +1,7 @@
 package uet.oop.bomberman.entities.airEntities;
 
 import javafx.scene.image.Image;
+import uet.oop.bomberman.BomberManGame;
 import uet.oop.bomberman.entities.AirEntity;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.Map;
@@ -28,7 +29,7 @@ public class Brick extends AirEntity {
 
     @Override
     public void remove() {
-        Map.mesh[getY()][getX()] -= 2;
+        BomberManGame.map.mesh[getY()][getX()] -= 2;
         dead = true;
     }
 

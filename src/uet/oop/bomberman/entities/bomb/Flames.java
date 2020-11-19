@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.BomberManGame;
 import uet.oop.bomberman.entities.Map;
+import uet.oop.bomberman.entities.airEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -41,7 +42,7 @@ public class Flames extends Flame {
         flames2.add(center2);
 
         for(int i = 1; i <= r; i++){
-            if(Map.mesh[getY() - i][getX()] != 0 || i == r){
+            if(BomberManGame.map.mesh[getY() - i][getX()] != 0 || i == r){
                 Flame top = new Flame(getX(), getY() - i, "top", Sprite.explosion_vertical_top_last.getFxImage());
                 flames.add(top);
                 Flame top1 = new Flame(getX(), getY() - i, "Flame", Sprite.explosion_vertical_top_last1.getFxImage());
@@ -60,7 +61,7 @@ public class Flames extends Flame {
             }
         }
         for(int i = 1; i <= r; i++){
-            if(Map.mesh[getY() + i][getX()] != 0 || i == r){
+            if(BomberManGame.map.mesh[getY() + i][getX()] != 0 || i == r){
                 Flame down = new Flame(getX(), getY() + i, "down", Sprite.explosion_vertical_down_last.getFxImage());
                 flames.add(down);
                 Flame down1 = new Flame(getX(), getY() + i, "Flame", Sprite.explosion_vertical_down_last1.getFxImage());
@@ -79,7 +80,7 @@ public class Flames extends Flame {
             }
         }
         for(int i = 1; i <= r; i++){
-            if(Map.mesh[getY()][getX() - i] != 0 || i == r){
+            if(BomberManGame.map.mesh[getY()][getX() - i] != 0 || i == r){
                 Flame left = new Flame(getX() - i, getY(), "left", Sprite.explosion_horizontal_left_last.getFxImage());
                 flames.add(left);
                 Flame left1 = new Flame(getX() - i, getY(), "Flame", Sprite.explosion_horizontal_left_last1.getFxImage());
@@ -98,7 +99,7 @@ public class Flames extends Flame {
             }
         }
         for(int i = 1; i <= r; i++){
-            if(Map.mesh[getY()][getX() + i] != 0 || i == r){
+            if(BomberManGame.map.mesh[getY()][getX() + i] != 0 || i == r){
                 Flame right = new Flame(getX() + i, getY(), "right", Sprite.explosion_horizontal_right_last.getFxImage());
                 flames.add(right);
                 Flame right1 = new Flame(getX() + i, getY(), "Flame", Sprite.explosion_horizontal_right_last1.getFxImage());
@@ -173,6 +174,8 @@ public class Flames extends Flame {
 
             }
         });
+
+        BomberManGame.map.loadUF();
     }
 
     public boolean inRange(int xUnit, int yUnit){

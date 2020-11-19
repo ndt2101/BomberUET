@@ -22,36 +22,32 @@ public abstract class Enemy extends AirEntity {
     @Override
     public abstract void animate();
 
-    @Override
     public void remove() {
-        Map.mesh[getY()][getX()] = 0;
+        BomberManGame.map.mesh[getY()][getX()] = 0;
         dead = true;
     }
 
-    @Override
     public void moveUp(){
-        if(y > SCALE_SIZE && Map.mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] == 0){
+        if(y > SCALE_SIZE && BomberManGame.map.mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] == 0){
             y -= SCALE_SIZE;
         }
     }
 
-    @Override
     public void moveDown(){
-        if(Map.mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] == 0 ){
+        if(BomberManGame.map.mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] == 0 ){
             y += SCALE_SIZE;
         }
     }
 
-    @Override
     public void moveLeft(){
-        if(x > SCALE_SIZE && Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] == 0 ) {
+        if(BomberManGame.map.mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] == 0 ) {
             x -= SCALE_SIZE;
         }
     }
 
-    @Override
+
     public void moveRight(){
-        if(Map.mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] == 0 ) {
+        if(BomberManGame.map.mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] == 0 ) {
             x += SCALE_SIZE;
         }
     }

@@ -15,7 +15,6 @@ public class Solution {
         Random rd = new Random();
         int row = rd.nextInt(5) + 15;
         int colum = rd.nextInt(10) + 20;
-        System.out.println(row + " " + colum);
 
         char[][] map = new char[row][colum];
 

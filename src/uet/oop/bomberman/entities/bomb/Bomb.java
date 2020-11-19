@@ -17,7 +17,7 @@ public class Bomb extends AirEntity {
     Flames flames;
     public Bomb(int x, int y, String type, Image img) {
         super(x, y, type, img);
-        Map.mesh[getY()][getX()] = 2;
+        BomberManGame.map.mesh[getY()][getX()] = 2;
         flames = new Flames(getX(), getY(), flameRange);
         BomberManGame.flames.add(this.flames);
     }
@@ -52,7 +52,7 @@ public class Bomb extends AirEntity {
     @Override
     public void remove() {
         if(timeOut > 0) explode();
-        Map.mesh[getY()][getX()] = 0;
+        BomberManGame.map.mesh[getY()][getX()] = 0;
         Bomber.bombRange++;
         dead = true;
     }

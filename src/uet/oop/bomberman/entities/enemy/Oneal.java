@@ -20,14 +20,19 @@ public class Oneal extends Enemy {
     @Override
     public void update() {
         super.update();
-        stateClock++;
-        if(time > 0){
-            time--;
+        if(stateClock > 0 || check){
+            stateClock--;
         }
         else{
-//            randomMove();
-            findWay();
-            time = 20;
+            boolean sameComponent = BomberManGame.map.uf.connected(BomberManGame.map.getUFId(getY(), getX()),
+                    BomberManGame.map.getUFId(Bomber.GETY(), Bomber.GETX()));
+            if(sameComponent){
+                findWay();
+            }
+            else{
+                randomMove();
+            }
+            stateClock = 20;
         }
     }
 
@@ -51,7 +56,7 @@ public class Oneal extends Enemy {
     @Override
     public void remove() {
         if(HP == 0){
-            Map.mesh[getY()][getX()] = 0;
+            BomberManGame.map.mesh[getY()][getX()] = 0;
             dead = true;
         }
         else HP--;

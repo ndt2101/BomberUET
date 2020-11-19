@@ -18,10 +18,10 @@ public abstract class AirEntity {
     protected int y;
 
     protected int SCALE_SIZE = Sprite.SCALED_SIZE;
-    public boolean check;
+    protected boolean check = false;
 
-    public int timeOut = 60;
-    public int stateClock = 0;
+    protected int timeOut = 60;
+    protected int stateClock = 0;
     public AirEntity(int x, int y, String type, Image img){
         this.x = x * Sprite.SCALED_SIZE;
         this.y = y * Sprite.SCALED_SIZE;
@@ -35,7 +35,6 @@ public abstract class AirEntity {
     }
 
     public AirEntity() {
-
     }
 
 
@@ -56,18 +55,6 @@ public abstract class AirEntity {
 
     public abstract void remove();
 
-    public void moveUp(){
-
-    }
-    public void moveDown(){
-
-    }
-    public void moveLeft(){
-
-    }
-    public void moveRight(){
-
-    }
 
     public int getX(){
         return x / Sprite.SCALED_SIZE;
