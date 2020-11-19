@@ -2,6 +2,7 @@ package uet.oop.bomberman.entities;
 
 import edu.princeton.cs.algs4.UF;
 import uet.oop.bomberman.Solution;
+import uet.oop.bomberman.entities.enemy.Doll;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.entities.airEntities.*;
 import uet.oop.bomberman.entities.enemy.Balloon;
@@ -50,7 +51,7 @@ public class Map {
 
     public void insertFromFile(){
 
-        File file = new File("res/levels/Level1.txt");
+        File file = new File("res/levels/Level0.txt");
         Scanner scan = null;
         try {
             scan = new Scanner(file);
@@ -110,7 +111,7 @@ public class Map {
                         break;
                     }
                     case '3':{
-                        object = new Oneal(colIndex, rowIndex,"Doll", Sprite.doll_right1.getFxImage());
+                        object = new Doll(colIndex, rowIndex,"Doll", Sprite.doll_right1.getFxImage());
                         break;
                     }
                     case 'b':{
@@ -262,14 +263,19 @@ public class Map {
                 }
             }
         }
-
+        for(int i = 1; i < row - 1; i++){
+            for(int j = 1; j < colum - 1; j++){
+                System.out.print(getUFId(i, j) + " ");
+            }
+            System.out.println();
+        }
     }
 
     public int getUFId(int x, int y){
         return (x - 1) * (colum - 2) + y - 1;
     }
 
-    public String ch = "   *f2b   f        x  s        f s     1x ";
+    public String ch = "   *f2b   f       3 x  s        f s     1x ";
     public String ch2 = "   *fb   f        x  s        f s     x ";
     public void randomMap() throws IOException {
         Random rd = new Random();

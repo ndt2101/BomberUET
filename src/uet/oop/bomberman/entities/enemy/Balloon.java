@@ -24,7 +24,7 @@ public class Balloon extends Enemy {
         }
         else{
             randomMove();
-            time = 30;
+            time = 10;
         }
 //        if (check) {
 //            animate();

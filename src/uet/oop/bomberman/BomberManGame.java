@@ -93,6 +93,12 @@ public class BomberManGame extends Application{
                     }
                     break;
                 }
+                case "Doll":{
+                    if(entity.toString().equals(player.toString())){
+                        player.remove();
+                    }
+                    break;
+                }
                 case "BombItem":{
                     if(entity.toString().equals(player.toString())){
                         entity.remove();
@@ -134,7 +140,7 @@ public class BomberManGame extends Application{
             if(portal.toString().equals(player.toString())){
                 boolean emptyEnemy = true;
                 for(int i = 0; i < entities.size(); i++){
-                    if(entities.get(i).getType().equals("Balloon") || entities.get(i).getType().equals("Oneal")){
+                    if(entities.get(i).getType().equals("Balloon") || entities.get(i).getType().equals("Oneal") || entities.get(i).getType().equals("Doll")){
                         emptyEnemy = false;
                     }
                 }

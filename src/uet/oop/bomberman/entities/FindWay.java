@@ -98,49 +98,42 @@ public class FindWay {
         boolean canMove = false;
         String next = "";
         int i = 0;
+
+
         do{
             next = distances.get(i).getNext();
             switch (next){
-                case "up": {
+                case "up" :{
                     if(BomberManGame.map.mesh[enemyY - 1][enemyX] != 0){
                         i++;
                     }
-                    else{
-                        canMove = true;
-                    }
+                    else canMove = true;
                     break;
                 }
-                case "down": {
+                case "down" :{
                     if(BomberManGame.map.mesh[enemyY + 1][enemyX] != 0){
                         i++;
                     }
-                    else{
-                        canMove = true;
-                    }
+                    else canMove = true;
                     break;
                 }
-                case "left": {
-                    if(BomberManGame.map.mesh[enemyY ][enemyX - 1] != 0){
+                case "left" :{
+                    if(BomberManGame.map.mesh[enemyY][enemyX - 1] != 0){
                         i++;
                     }
-                    else{
-                        canMove = true;
-                    }
+                    else canMove = true;
                     break;
                 }
-                case "right": {
-                    if(BomberManGame.map.mesh[enemyY ][enemyX + 1] != 0){
+                case "right" :{
+                    if(BomberManGame.map.mesh[enemyY][enemyX + 1] != 0){
                         i++;
                     }
-                    else{
-                        canMove = true;
-                    }
+                    else canMove = true;
                     break;
                 }
             }
         }
         while (!canMove && i < 4);
-
         return next;
     }
 

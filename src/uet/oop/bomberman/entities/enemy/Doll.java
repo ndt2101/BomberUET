@@ -2,18 +2,18 @@ package uet.oop.bomberman.entities.enemy;
 
 import javafx.scene.image.Image;
 import uet.oop.bomberman.BomberManGame;
-import uet.oop.bomberman.entities.AirEntity;
 import uet.oop.bomberman.entities.FindWay;
-import uet.oop.bomberman.entities.Map;
 import uet.oop.bomberman.entities.airEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 
 /**
- * Created by hello on 11/12/2020.
+ * Created by hello on 11/19/2020.
  */
-public class Oneal extends Enemy {
+public class Doll extends Enemy{
+
     public double time = 30;
-    public Oneal(int x, int y, String type, Image img) {
+
+    public Doll(int x, int y, String type, Image img) {
         super(x, y, type, img);
     }
 
@@ -39,7 +39,7 @@ public class Oneal extends Enemy {
     @Override
     public void animate() {
         if(timeOut % 30 == 0){
-            img = Sprite.oneal_dead.getFxImage();
+            img = Sprite.doll_dead.getFxImage();
         }
         else if (timeOut % 30 == 10){
             img = Sprite.mob_dead1.getFxImage();
@@ -80,25 +80,25 @@ public class Oneal extends Enemy {
 
     @Override
     public void moveUp(){
-        img = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, stateClock, 30).getFxImage();
+        img = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2, Sprite.doll_left3, stateClock, 30).getFxImage();
 //        y -= SCALE_SIZE;
         super.moveUp();
     }
     @Override
     public void moveDown(){
-        img = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, stateClock, 30).getFxImage();
+        img = Sprite.movingSprite(Sprite.doll_right1, Sprite.doll_right2, Sprite.doll_right3, stateClock, 30).getFxImage();
 //        y += SCALE_SIZE;
         super.moveDown();
     }
     @Override
     public void moveLeft(){
-        img = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, stateClock, 30).getFxImage();
+        img = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2, Sprite.doll_left3, stateClock, 30).getFxImage();
 //        x -= SCALE_SIZE;
         super.moveLeft();
     }
     @Override
     public void moveRight(){
-        img = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, stateClock, 30).getFxImage();
+        img = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2, Sprite.doll_left3, stateClock, 30).getFxImage();
 //        x += SCALE_SIZE;
         super.moveRight();
     }
@@ -128,3 +128,4 @@ public class Oneal extends Enemy {
     }
 
 }
+

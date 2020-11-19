@@ -27,29 +27,91 @@ public abstract class Enemy extends AirEntity {
         dead = true;
     }
 
+//    public void moveUp(){
+//        if(y > SCALE_SIZE && BomberManGame.map.mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] == 0){
+//            y -= SCALE_SIZE;
+//        }
+//    }
+//
+//    public void moveDown(){
+//        if(BomberManGame.map.mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] == 0 ){
+//            y += SCALE_SIZE;
+//        }
+//    }
+//
+//    public void moveLeft(){
+//        if(BomberManGame.map.mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] == 0 ) {
+//            x -= SCALE_SIZE;
+//        }
+//    }
+//
+//
+//    public void moveRight(){
+//        if(BomberManGame.map.mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] == 0 ) {
+//            x += SCALE_SIZE;
+//        }
+//    }
+
+
+    protected int moveSize = SCALE_SIZE / 2;
     public void moveUp(){
-        if(y > SCALE_SIZE && BomberManGame.map.mesh[y/SCALE_SIZE - 1][x/SCALE_SIZE] == 0){
-            y -= SCALE_SIZE;
-        }
+    if(BomberManGame.map.mesh[getY() - 1][getX()] == 0 || BomberManGame.map.mesh[getY() - 1][getX()] == 1) {
+        x = getX() * SCALE_SIZE;
+        y -= moveSize;
     }
+    else if(y % SCALE_SIZE != 0){
+        y = getY() * SCALE_SIZE;
+    }
+}
 
     public void moveDown(){
-        if(BomberManGame.map.mesh[y/SCALE_SIZE + 1][x/SCALE_SIZE] == 0 ){
-            y += SCALE_SIZE;
+        if(BomberManGame.map.mesh[getY() + 1][getX()] == 0 || BomberManGame.map.mesh[getY() + 1][getX()] == 1) {
+            x = getX() * SCALE_SIZE;
+            y += moveSize;
+        }
+        else if(y % SCALE_SIZE != 0){
+            y = getY() * SCALE_SIZE;
         }
     }
 
     public void moveLeft(){
-        if(BomberManGame.map.mesh[y/SCALE_SIZE][x/SCALE_SIZE - 1] == 0 ) {
-            x -= SCALE_SIZE;
+
+        if(BomberManGame.map.mesh[getY()][getX() - 1] == 0 || BomberManGame.map.mesh[getY()][getX() - 1] == 1) {
+            y = getY() * SCALE_SIZE;
+            x -= moveSize;
+        }
+        else if(x % SCALE_SIZE != 0){
+            x = getX() * SCALE_SIZE;
         }
     }
-
 
     public void moveRight(){
-        if(BomberManGame.map.mesh[y/SCALE_SIZE][x/SCALE_SIZE + 1] == 0 ) {
-            x += SCALE_SIZE;
+        if(BomberManGame.map.mesh[getY()][getX() + 1] == 0 || BomberManGame.map.mesh[getY()][getX() + 1] == 1){
+            y = getY() * SCALE_SIZE;
+            x += moveSize;
+        }
+        else if(x % SCALE_SIZE != 0){
+            x = getX() * SCALE_SIZE;
         }
     }
 
+    @Override
+    public int getX(){
+        if(x % SCALE_SIZE < 16){
+            return(int) Math.floor(x / SCALE_SIZE);
+        }
+        else{
+            return (int) Math.floor(x / SCALE_SIZE) + 1;
+        }
+    }
+
+    @Override
+    public int getY(){
+        if(y % SCALE_SIZE < 16){
+            return(int) Math.floor(y / SCALE_SIZE);
+        }
+        else{
+            return (int) Math.floor(y / SCALE_SIZE) + 1;
+        }
+    }
 }
