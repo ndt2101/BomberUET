@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities;
 
+import uet.oop.bomberman.Solution;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.entities.airEntities.*;
 import uet.oop.bomberman.entities.enemy.Balloon;
@@ -10,6 +11,7 @@ import uet.oop.bomberman.entities.groundEntities.Wall;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -26,13 +28,18 @@ public class Map {
     public static int[][] mesh = new int[0][0];
 
     public Map() {
+        try {
+            Solution.randomMap();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         insertFromFile();
         loadMapInt();
     }
 
     public void insertFromFile(){
 
-        File file = new File("res/levels/Level1.txt");
+        File file = new File("res/levels/Level0.txt");
         Scanner scan = null;
         try {
             scan = new Scanner(file);
