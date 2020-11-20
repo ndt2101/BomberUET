@@ -1,7 +1,7 @@
 package uet.oop.bomberman.entities;
 
 import edu.princeton.cs.algs4.UF;
-import uet.oop.bomberman.Solution;
+//import uet.oop.bomberman.Solution;
 import uet.oop.bomberman.entities.enemy.Doll;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.entities.airEntities.*;
@@ -74,13 +74,13 @@ public class Map {
             map.add(lineChar);
         }
 
-        for(int rowIndex = 0; rowIndex < row; rowIndex++){
-            ArrayList<Character> lineChar = map.get(rowIndex);
-            for(int colIndex = 0; colIndex < colum; colIndex++){
-                System.out.print(lineChar.get(colIndex));
-            }
-            System.out.println();
-        }
+//        for(int rowIndex = 0; rowIndex < row; rowIndex++){
+//            ArrayList<Character> lineChar = map.get(rowIndex);
+//            for(int colIndex = 0; colIndex < colum; colIndex++){
+//                System.out.print(lineChar.get(colIndex));
+//            }
+//            System.out.println();
+//        }
 
     }
 
@@ -235,17 +235,17 @@ public class Map {
             }
         }
 
-        for(int i = 0; i < row; i++){
-            for(int j = 0; j < colum; j++){
-                if(mesh[i][j] < 0){
-                    System.out.print(mesh[i][j]);
-                }
-                else {
-                    System.out.print(mesh[i][j] + " ");
-                }
-            }
-            System.out.println();
-        }
+//        for(int i = 0; i < row; i++){
+//            for(int j = 0; j < colum; j++){
+//                if(mesh[i][j] < 0){
+//                    System.out.print(mesh[i][j]);
+//                }
+//                else {
+//                    System.out.print(mesh[i][j] + " ");
+//                }
+//            }
+//            System.out.println();
+//        }
         return mesh;
     }
 
@@ -263,12 +263,12 @@ public class Map {
                 }
             }
         }
-        for(int i = 1; i < row - 1; i++){
-            for(int j = 1; j < colum - 1; j++){
-                System.out.print(getUFId(i, j) + " ");
-            }
-            System.out.println();
-        }
+//        for(int i = 1; i < row - 1; i++){
+//            for(int j = 1; j < colum - 1; j++){
+//                System.out.print(getUFId(i, j) + " ");
+//            }
+//            System.out.println();
+//        }
     }
 
     public int getUFId(int x, int y){

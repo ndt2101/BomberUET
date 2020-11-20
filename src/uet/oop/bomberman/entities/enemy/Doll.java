@@ -85,25 +85,21 @@ public class Doll extends Enemy{
     @Override
     public void moveUp(){
         img = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2, Sprite.doll_left3, stateClock, 30).getFxImage();
-//        y -= SCALE_SIZE;
         super.moveUp();
     }
     @Override
     public void moveDown(){
         img = Sprite.movingSprite(Sprite.doll_right1, Sprite.doll_right2, Sprite.doll_right3, stateClock, 30).getFxImage();
-//        y += SCALE_SIZE;
         super.moveDown();
     }
     @Override
     public void moveLeft(){
         img = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2, Sprite.doll_left3, stateClock, 30).getFxImage();
-//        x -= SCALE_SIZE;
         super.moveLeft();
     }
     @Override
     public void moveRight(){
         img = Sprite.movingSprite(Sprite.doll_left1, Sprite.doll_left2, Sprite.doll_left3, stateClock, 30).getFxImage();
-//        x += SCALE_SIZE;
         super.moveRight();
     }
 

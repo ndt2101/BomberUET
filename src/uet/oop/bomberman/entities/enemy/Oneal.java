@@ -97,13 +97,11 @@ public class Oneal extends Enemy {
     @Override
     public void moveLeft(){
         img = Sprite.movingSprite(Sprite.oneal_left1, Sprite.oneal_left2, Sprite.oneal_left3, stateClock, 30).getFxImage();
-//        x -= SCALE_SIZE;
         super.moveLeft();
     }
     @Override
     public void moveRight(){
         img = Sprite.movingSprite(Sprite.oneal_right1, Sprite.oneal_right2, Sprite.oneal_right3, stateClock, 30).getFxImage();
-//        x += SCALE_SIZE;
         super.moveRight();
     }
 

@@ -125,7 +125,7 @@ public class Flames extends Flame {
         if(timeOut == 60){
             kill();
         }
-        else if(timeOut == 0){
+        else if(timeOut == 5){
             remove();
         }
         timeOut--;

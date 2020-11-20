@@ -51,14 +51,14 @@ public class FindWay {
             return next + " " + distance;
         }
     }
-    ArrayList<Distance> olddistances = new ArrayList<>();
+//    ArrayList<Distance> olddistances = new ArrayList<>();
 
     public static double distance(int x1, int y1, int x2, int y2){
         return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
     }
 
     public static String calculateWay(int playerX, int playerY, int enemyX, int enemyY){
-        ArrayList<Distance> newdistances = new ArrayList<>();
+        ArrayList<Distance> distances = new ArrayList<>();
 
         double up = distance(playerX, playerY, enemyX, enemyY - 1);
         double down = distance(playerX, playerY, enemyX, enemyY + 1);
@@ -69,24 +69,24 @@ public class FindWay {
         Distance down1 = new Distance("down", down);
         Distance left1 = new Distance("left", left);
         Distance right1 = new Distance("right", right);
-        newdistances.add(up1); newdistances.add(down1); newdistances.add(left1); newdistances.add(right1);
+        distances.add(up1); distances.add(down1); distances.add(left1); distances.add(right1);
 
         for(int i = 0; i < 4; i++){
-            double min = newdistances.get(i).getDistance();
+            double min = distances.get(i).getDistance();
             int index = i;
             for (int j = i; j < 4; j++){
-                if(min > newdistances.get(j).getDistance()){
-                    min = newdistances.get(j).getDistance();
+                if(min > distances.get(j).getDistance()){
+                    min = distances.get(j).getDistance();
                     index = j;
                 }
             }
-            Distance temp = new Distance(newdistances.get(i));
-            newdistances.set(i, newdistances.get(index));
-            newdistances.set(index, temp);
+            Distance temp = new Distance(distances.get(i));
+            distances.set(i, distances.get(index));
+            distances.set(index, temp);
 
         }
 
-        return canMove(newdistances, enemyX, enemyY);
+        return canMove(distances, enemyX, enemyY);
     }
 
     public static String canMove(ArrayList<Distance> distances, int enemyX, int enemyY){
@@ -133,14 +133,14 @@ public class FindWay {
     }
 
 
-    public static void main(String[] strings){
-        FindWay findWay = new FindWay();
-//        System.out.println(findWay.distance(0, 0, 1, 1));
-//        findWay.calculateWay(1, 1, 2, 1);
-
-        UF uf = new UF(20 * 5);
-
-        System.out.println(uf.count());
-    }
+//    public static void main(String[] strings){
+//        FindWay findWay = new FindWay();
+////        System.out.println(findWay.distance(0, 0, 1, 1));
+////        findWay.calculateWay(1, 1, 2, 1);
+//
+//        UF uf = new UF(20 * 5);
+//
+//        System.out.println(uf.count());
+//    }
 
 }

@@ -17,13 +17,6 @@ public class Brick extends AirEntity {
 
     @Override
     public void update() {
-//        if(check) {
-//            animate();
-//            timeOut--;
-//            if(timeOut == 0) {
-//                remove();
-//            }
-//        }
         super.update();
     }
 
@@ -33,9 +26,6 @@ public class Brick extends AirEntity {
         dead = true;
     }
 
-//    public void check() {
-//        check = true;
-//    }
 
     public void animate(){
         img = Sprite.movingSprite(Sprite.brick_exploded, Sprite.brick_exploded1, Sprite.brick_exploded2, timeOut, 60).getFxImage();

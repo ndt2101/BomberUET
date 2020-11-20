@@ -254,43 +254,11 @@ public class BomberManGame extends Application{
                         if(!player.check)
                         player.moveRight();
                         break;
-                    case DIGIT1:
-                        player.increaseSpeed();
-                        break;
-                    case DIGIT2:
-                        player.increaseFlams();
-                        break;
-                    case DIGIT3:
-                        player.increseBomb();
-                        break;
                     case SPACE:{
                         if(!player.check)
                         player.shoot();
                         break;
                     }
-                    case DIGIT0:{
-                        entities.forEach(airEntity -> {
-                            if(airEntity.getType().equals("Brick")){
-                                airEntity.remove();
-                            }
-                        });
-                        entities.removeIf(airEntity -> {
-                            return airEntity.isDead();
-                        });
-                        break;
-                    }
-                    case ENTER:{
-                        entities.forEach(airEntity -> {
-                            if(airEntity.getType().equals("Balloon") || airEntity.getType().equals("Oneal")){
-                                airEntity.remove();
-                            }
-                        });
-                        entities.removeIf(airEntity -> {
-                            return airEntity.isDead();
-                        });
-                        break;
-                    }
-
                 }
             }
         });
