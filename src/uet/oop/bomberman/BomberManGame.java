@@ -85,19 +85,19 @@ public class BomberManGame extends Application{
             switch (entity.getType()){
                 case "Balloon":{
                     if(entity.toString().equals(player.toString())){
-                        player.remove();
+                        player.check();
                     }
                     break;
                 }
                 case "Oneal":{
                     if(entity.toString().equals(player.toString())){
-                        player.remove();
+                        player.check();
                     }
                     break;
                 }
                 case "Doll":{
                     if(entity.toString().equals(player.toString())){
-                        player.remove();
+                        player.check();
                     }
                     break;
                 }
