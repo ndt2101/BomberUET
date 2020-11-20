@@ -223,27 +223,35 @@ public class BomberManGame extends Application{
             public void handle(KeyEvent event) {
                 switch (event.getCode()){
                     case W:
+                        if(!player.check)
                         player.moveUp();
                         break;
                     case S:
+                        if(!player.check)
                         player.moveDown();
                         break;
                     case A:
+                        if(!player.check)
                         player.moveLeft();
                         break;
                     case D:
+                        if(!player.check)
                         player.moveRight();
                         break;
                     case UP:
+                        if(!player.check)
                         player.moveUp();
                         break;
                     case DOWN:
+                        if(!player.check)
                         player.moveDown();
                         break;
                     case LEFT:
+                        if(!player.check)
                         player.moveLeft();
                         break;
                     case RIGHT:
+                        if(!player.check)
                         player.moveRight();
                         break;
                     case DIGIT1:
@@ -256,6 +264,7 @@ public class BomberManGame extends Application{
                         player.increseBomb();
                         break;
                     case SPACE:{
+                        if(!player.check)
                         player.shoot();
                         break;
                     }

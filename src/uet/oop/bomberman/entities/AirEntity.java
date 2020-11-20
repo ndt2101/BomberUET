@@ -18,7 +18,7 @@ public abstract class AirEntity {
     protected int y;
 
     protected int SCALE_SIZE = Sprite.SCALED_SIZE;
-    protected boolean check = false;
+    public boolean check = false;
 
     protected int timeOut = 60;
     protected int stateClock = 0;

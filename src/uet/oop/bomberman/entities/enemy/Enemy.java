@@ -28,43 +28,50 @@ public abstract class Enemy extends AirEntity {
 
     protected int moveSize = SCALE_SIZE / 2;
     public void moveUp(){
-    if(BomberManGame.map.mesh[getY() - 1][getX()] == 0 || BomberManGame.map.mesh[getY() - 1][getX()] == 1) {
-        x = getX() * SCALE_SIZE;
-        y -= moveSize;
-    }
-    else if(y % SCALE_SIZE != 0){
-        y = getY() * SCALE_SIZE;
-    }
-}
-
-    public void moveDown(){
-        if(BomberManGame.map.mesh[getY() + 1][getX()] == 0 || BomberManGame.map.mesh[getY() + 1][getX()] == 1) {
+    if (!check) {
+        if (BomberManGame.map.mesh[getY() - 1][getX()] == 0 || BomberManGame.map.mesh[getY() - 1][getX()] == 1) {
             x = getX() * SCALE_SIZE;
-            y += moveSize;
+            y -= moveSize;
         }
         else if(y % SCALE_SIZE != 0){
             y = getY() * SCALE_SIZE;
         }
     }
+}
+
+    public void moveDown(){
+        if (!check) {
+            if(BomberManGame.map.mesh[getY() + 1][getX()] == 0 || BomberManGame.map.mesh[getY() + 1][getX()] == 1) {
+                x = getX() * SCALE_SIZE;
+                y += moveSize;
+            }
+            else if(y % SCALE_SIZE != 0){
+                y = getY() * SCALE_SIZE;
+            }
+        }
+    }
 
     public void moveLeft(){
-
-        if(BomberManGame.map.mesh[getY()][getX() - 1] == 0 || BomberManGame.map.mesh[getY()][getX() - 1] == 1) {
-            y = getY() * SCALE_SIZE;
-            x -= moveSize;
-        }
-        else if(x % SCALE_SIZE != 0){
-            x = getX() * SCALE_SIZE;
+        if (!check) {
+            if(BomberManGame.map.mesh[getY()][getX() - 1] == 0 || BomberManGame.map.mesh[getY()][getX() - 1] == 1) {
+                y = getY() * SCALE_SIZE;
+                x -= moveSize;
+            }
+            else if(x % SCALE_SIZE != 0){
+                x = getX() * SCALE_SIZE;
+            }
         }
     }
 
     public void moveRight(){
-        if(BomberManGame.map.mesh[getY()][getX() + 1] == 0 || BomberManGame.map.mesh[getY()][getX() + 1] == 1){
-            y = getY() * SCALE_SIZE;
-            x += moveSize;
-        }
-        else if(x % SCALE_SIZE != 0){
-            x = getX() * SCALE_SIZE;
+        if (!check) {
+            if(BomberManGame.map.mesh[getY()][getX() + 1] == 0 || BomberManGame.map.mesh[getY()][getX() + 1] == 1){
+                y = getY() * SCALE_SIZE;
+                x += moveSize;
+            }
+            else if(x % SCALE_SIZE != 0){
+                x = getX() * SCALE_SIZE;
+            }
         }
     }
 
