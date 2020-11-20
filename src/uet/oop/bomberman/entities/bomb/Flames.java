@@ -14,7 +14,7 @@ import uet.oop.bomberman.level.*;
  */
 public class Flames extends Flame {
     public int r;
-    public int timeOut = 120;
+    public int timeOut = 180;
     List<Flame> flames = new ArrayList<>();
     List<Flame> flames1 = new ArrayList<>();
     List<Flame> flames2 = new ArrayList<>();
@@ -39,7 +39,7 @@ public class Flames extends Flame {
         flames1.add(center1);
         Flame center2 = new Flame(getX(), getY(), "Flame", Sprite.bomb_exploded2.getFxImage());
         flames2.add(center2);
-        Audio.playBombExplode();
+
         for(int i = 1; i <= r; i++){
             if(BomberManGame.map.mesh[getY() - i][getX()] != 0 || i == r){
                 Flame top = new Flame(getX(), getY() - i, "top", Sprite.explosion_vertical_top_last.getFxImage());
@@ -122,7 +122,7 @@ public class Flames extends Flame {
     public void update() {
         stateClock++;
 
-        if(timeOut == 40){
+        if(timeOut == 60){
             kill();
         }
         else if(timeOut == 0){
@@ -135,6 +135,7 @@ public class Flames extends Flame {
         BomberManGame.entities.forEach(entity -> {
             if(inRange(entity.getX(), entity.getY())){
                 if(entity.isItem()){
+
                     entity.remove();
                 }
                 else{
@@ -162,6 +163,7 @@ public class Flames extends Flame {
         if(timeOut > 60){
             timeOut = 60;
         }
+        Audio.playBombExplode();
     }
 
 

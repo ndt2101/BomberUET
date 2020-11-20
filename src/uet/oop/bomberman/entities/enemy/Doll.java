@@ -16,6 +16,7 @@ public class Doll extends Enemy{
 
     public Doll(int x, int y, String type, Image img) {
         super(x, y, type, img);
+        this.HP = 1;
     }
 
     @Override
@@ -63,7 +64,6 @@ public class Doll extends Enemy{
             BomberManGame.map.mesh[getY()][getX()] = 0;
             dead = true;
         }
-        else HP--;
     }
 
     private void randomMove(){

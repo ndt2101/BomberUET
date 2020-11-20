@@ -31,7 +31,7 @@ public abstract class Enemy extends AirEntity {
     if (!check) {
         if (BomberManGame.map.mesh[getY() - 1][getX()] == 0 || BomberManGame.map.mesh[getY() - 1][getX()] == 1) {
             x = getX() * SCALE_SIZE;
-            y -= moveSize;
+            y -= moveSize / 2;
         }
         else if(y % SCALE_SIZE != 0){
             y = getY() * SCALE_SIZE;
@@ -43,7 +43,7 @@ public abstract class Enemy extends AirEntity {
         if (!check) {
             if(BomberManGame.map.mesh[getY() + 1][getX()] == 0 || BomberManGame.map.mesh[getY() + 1][getX()] == 1) {
                 x = getX() * SCALE_SIZE;
-                y += moveSize;
+                y += moveSize / 2;
             }
             else if(y % SCALE_SIZE != 0){
                 y = getY() * SCALE_SIZE;
@@ -55,7 +55,7 @@ public abstract class Enemy extends AirEntity {
         if (!check) {
             if(BomberManGame.map.mesh[getY()][getX() - 1] == 0 || BomberManGame.map.mesh[getY()][getX() - 1] == 1) {
                 y = getY() * SCALE_SIZE;
-                x -= moveSize;
+                x -= moveSize / 2;
             }
             else if(x % SCALE_SIZE != 0){
                 x = getX() * SCALE_SIZE;
@@ -67,7 +67,7 @@ public abstract class Enemy extends AirEntity {
         if (!check) {
             if(BomberManGame.map.mesh[getY()][getX() + 1] == 0 || BomberManGame.map.mesh[getY()][getX() + 1] == 1){
                 y = getY() * SCALE_SIZE;
-                x += moveSize;
+                x += moveSize / 2;
             }
             else if(x % SCALE_SIZE != 0){
                 x = getX() * SCALE_SIZE;

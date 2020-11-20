@@ -12,7 +12,7 @@ import uet.oop.bomberman.graphics.Sprite;
  * Created by hello on 11/12/2020.
  */
 public class Bomb extends AirEntity {
-    int timeOut = 120;
+    int timeOut = 180;
     public int flameRange = Bomber.flameRange;
     Flames flames;
     public Bomb(int x, int y, String type, Image img) {
@@ -34,13 +34,13 @@ public class Bomb extends AirEntity {
     }
 
     public void animate(){
-        if(timeOut % 60 == 0){
+        if(timeOut < 180 && timeOut >= 140){
             img = Sprite.bomb_1.getFxImage();
         }
-        else if (timeOut % 60 == 40){
+        else if (timeOut > 100){
             img = Sprite.bomb_2.getFxImage();
         }
-        else if (timeOut % 60 == 20){
+        else if (timeOut > 60){
             img = Sprite.bomb.getFxImage();
         }
     }

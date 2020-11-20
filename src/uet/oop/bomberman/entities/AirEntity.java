@@ -31,6 +31,10 @@ public abstract class AirEntity {
     }
 
     public void check() {
+        if (HP > 0) {
+            HP--;
+        }
+        else
         check = true;
     }
 
