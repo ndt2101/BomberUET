@@ -5,6 +5,7 @@ import uet.oop.bomberman.BomberManGame;
 import uet.oop.bomberman.entities.FindWay;
 import uet.oop.bomberman.entities.airEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.level.Audio;
 
 /**
  * Created by hello on 11/19/2020.
@@ -38,16 +39,19 @@ public class Doll extends Enemy{
 
     @Override
     public void animate() {
-        if(timeOut % 30 == 0){
+        if(timeOut == 59) {
+            Audio.playEntinyDie();
+        }
+        else if(timeOut < 60 && timeOut >= 40){
             img = Sprite.doll_dead.getFxImage();
         }
-        else if (timeOut % 30 == 10){
+        else if (timeOut > 20){
             img = Sprite.mob_dead1.getFxImage();
         }
-        else if (timeOut % 30 == 20){
+        else if (timeOut > 10){
             img = Sprite.mob_dead2.getFxImage();
         }
-        else if(timeOut == 5) {
+        else if(timeOut > 1) {
 
             img = Sprite.mob_dead3.getFxImage();
         }

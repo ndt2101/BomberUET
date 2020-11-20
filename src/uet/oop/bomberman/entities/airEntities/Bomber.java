@@ -3,10 +3,9 @@ package uet.oop.bomberman.entities.airEntities;
 import uet.oop.bomberman.BomberManGame;
 import uet.oop.bomberman.entities.AirEntity;
 import javafx.scene.image.Image;
-import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.Map;
 import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.level.Audio;
 
 /**
  * Created by hello on 11/12/2020.
@@ -98,6 +97,7 @@ public class Bomber extends AirEntity {
             AirEntity bomb = new Bomb(getX(), getY(), "Bomb", Sprite.bomb.getFxImage());
             BomberManGame.entities.add(0, bomb);
             bombRange--;
+            Audio.playBombDrop();
         }
     }
     @Override

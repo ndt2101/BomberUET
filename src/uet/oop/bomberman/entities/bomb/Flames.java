@@ -1,14 +1,13 @@
 package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.BomberManGame;
-import uet.oop.bomberman.entities.Map;
-import uet.oop.bomberman.entities.airEntities.Bomber;
 import uet.oop.bomberman.graphics.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
+import uet.oop.bomberman.level.*;
 
 /**
  * Created by hello on 11/13/2020.
@@ -40,7 +39,7 @@ public class Flames extends Flame {
         flames1.add(center1);
         Flame center2 = new Flame(getX(), getY(), "Flame", Sprite.bomb_exploded2.getFxImage());
         flames2.add(center2);
-
+        Audio.playBombExplode();
         for(int i = 1; i <= r; i++){
             if(BomberManGame.map.mesh[getY() - i][getX()] != 0 || i == r){
                 Flame top = new Flame(getX(), getY() - i, "top", Sprite.explosion_vertical_top_last.getFxImage());
@@ -122,38 +121,8 @@ public class Flames extends Flame {
     @Override
     public void update() {
         stateClock++;
-//        flames.forEach(flame -> {
-//            switch (flame.getType()){
-//                case "center":{
-//                    Image image = Sprite.movingSprite(Sprite.bomb_exploded, Sprite.bomb_exploded1, Sprite.bomb_exploded2, stateClock , 20).getFxImage();
-//                    flame.setImg(image);
-//                    break;
-//                }
-//                case "top":{
-//                    Image image = Sprite.movingSprite(Sprite.explosion_vertical_top_last, Sprite.explosion_vertical_top_last1, Sprite.explosion_vertical_top_last2, stateClock , 20).getFxImage();
-//                    flame.setImg(image);
-//                    break;
-//                }
-//                case "down":{
-//                    Image image = Sprite.movingSprite(Sprite.explosion_vertical_down_last, Sprite.explosion_vertical_down_last1, Sprite.explosion_vertical_down_last2, stateClock , 20).getFxImage();
-//                    flame.setImg(image);
-//                    break;
-//                }
-//                case "left":{
-//                    Image image = Sprite.movingSprite(Sprite.explosion_horizontal_left_last, Sprite.explosion_horizontal_left_last1, Sprite.explosion_horizontal_left_last2, stateClock , 20).getFxImage();
-//                    flame.setImg(image);
-//                    break;
-//                }
-//                case "right":{
-//                    Image image = Sprite.movingSprite(Sprite.explosion_horizontal_right_last, Sprite.explosion_horizontal_right_last1, Sprite.explosion_horizontal_right_last2, stateClock , 20).getFxImage();
-//                    flame.setImg(image);
-//                    break;
-//                }
-//
-//            }
-//        });
 
-        if(timeOut == 30){
+        if(timeOut == 40){
             kill();
         }
         else if(timeOut == 0){
@@ -174,7 +143,6 @@ public class Flames extends Flame {
 
             }
         });
-
         BomberManGame.map.loadUF();
     }
 
@@ -198,11 +166,6 @@ public class Flames extends Flame {
 
 
     public void render(GraphicsContext gc){
-//       if(timeOut < 30){
-//           flames.forEach(flame -> {
-//               flame.render(gc);
-//           });
-//       }
 
         if(timeOut <=60 && timeOut >= 40){
             flames.forEach(flame -> {

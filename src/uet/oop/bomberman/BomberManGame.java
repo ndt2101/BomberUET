@@ -1,6 +1,5 @@
 package uet.oop.bomberman;
 
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
@@ -25,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import uet.oop.bomberman.level.*;
 
 /**
  * Created by hello on 11/12/2020.
@@ -34,6 +34,7 @@ public class BomberManGame extends Application{
     public int SCALE_SIZE = Sprite.SCALED_SIZE;
     public static int WIDTH;
     public static int HEIGHT ;
+    public static Audio audio = new Audio(1000);
 
     public GraphicsContext gc;
     public Canvas canvas;
@@ -46,6 +47,7 @@ public class BomberManGame extends Application{
     public static List<AirEntity> entities = new ArrayList<>();
     public static List<Entity> stillObjects = new ArrayList<>();
     public static List<Flames> flames = new ArrayList<>();
+    public boolean checkDie = true;
 
     private int timeOut = 60;
 
@@ -102,6 +104,7 @@ public class BomberManGame extends Application{
                 case "BombItem":{
                     if(entity.toString().equals(player.toString())){
                         entity.remove();
+                        Audio.eat();
                         player.increseBomb();
                     }
                     break;
@@ -109,6 +112,7 @@ public class BomberManGame extends Application{
                 case "FlameItem":{
                     if(entity.toString().equals(player.toString())){
                         entity.remove();
+                        Audio.eat();
                         player.increaseFlams();
                     }
                     break;
@@ -116,6 +120,7 @@ public class BomberManGame extends Application{
                 case "SpeedItem":{
                     if(entity.toString().equals(player.toString())){
                         entity.remove();
+                        Audio.eat();
                         player.increaseSpeed();
                     }
                     break;
@@ -144,7 +149,12 @@ public class BomberManGame extends Application{
                         emptyEnemy = false;
                     }
                 }
-                if(emptyEnemy) gameOver("You win!");
+                if(emptyEnemy) {
+                    checkDie = false;
+                    audio.stopMenu();
+                    Audio.playVictory();
+                    gameOver("You win!");
+                }
             }
         });
     }
@@ -157,6 +167,10 @@ public class BomberManGame extends Application{
     }
 
     public void gameOver(String text){
+        if(checkDie) {
+            audio.stopMenu();
+            Audio.bomberdie();
+        }
         System.out.println("!gameover");
         timer.stop();
 
@@ -181,7 +195,7 @@ public class BomberManGame extends Application{
 
     @Override
     public void start(Stage primaryStage) {
-
+        audio.playMenu();
         WIDTH = map.colum;
         HEIGHT = map.row;
 

@@ -5,12 +5,13 @@ import uet.oop.bomberman.BomberManGame;
 import uet.oop.bomberman.entities.AirEntity;
 import uet.oop.bomberman.entities.Map;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.level.Audio;
 
 /**
  * Created by hello on 11/12/2020.
  */
 public class Balloon extends Enemy {
-    public double time = 30;
+    public double time = 60;
 
     public Balloon(int x, int y, String type, Image img) {
         super(x, y, type, img);
@@ -26,13 +27,6 @@ public class Balloon extends Enemy {
             randomMove();
             time = 10;
         }
-//        if (check) {
-//            animate();
-//            timeOut--;
-//            if(timeOut == 0) {
-//
-//            }
-//        }
     }
 
     private void randomMove(){
@@ -60,16 +54,19 @@ public class Balloon extends Enemy {
     }
 
     public void animate(){
-        if(timeOut % 30 == 0){
+        if(timeOut == 59) {
+            Audio.playEntinyDie();
+        }
+        else if(timeOut >= 40 && timeOut < 60){
             img = Sprite.balloom_dead.getFxImage();
         }
-        else if (timeOut % 30 == 10){
+        else if (timeOut >= 20){
             img = Sprite.mob_dead1.getFxImage();
         }
-        else if (timeOut % 30 == 20){
+        else if (timeOut > 10){
             img = Sprite.mob_dead2.getFxImage();
         }
-        else if(timeOut == 5) {
+        else if(timeOut > 1) {
 
             img = Sprite.mob_dead3.getFxImage();
         }
